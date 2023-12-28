@@ -5,10 +5,23 @@
 
 /* バー位置 */
 typedef struct {
-  int x;
-  int y;
+    int x;
 } Bar;
 Bar bar;
+
+typedef struct {
+    int x;
+    int y;
+} Ball;
+Ball ball;
+
+typedef struct {
+    int x;
+    int y;
+    int w;
+    int h;
+} BlockArea;
+BlockArea blockArea;
 
 /* ボタン押下情報 */
 char button;
@@ -41,6 +54,7 @@ void main(void) {
     set_bkg_data(0, sizeof(block_tile)/16, block_tile);
     // Barを表示（16x8）
     set_bkg_tiles(9, 14, 2, 1, bar_long);
+    bar.x = 9;
 
     game_start();
 }
@@ -85,15 +99,13 @@ void main(void) {
 
 /* ゲーム開始処理 */
 void game_start() {
-  //init();
+  init();
   update();
 }
 
 /* ゲーム初期化処理 */
 void init() {
   // ブロック再生成
-
-  printf("INIT WORLD!!");
 }
 
 
@@ -156,4 +168,8 @@ void update() {
     game_start();
     return;
   }
+}
+
+void BallProgress(){
+
 }
