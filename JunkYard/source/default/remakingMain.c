@@ -14,38 +14,6 @@
 #include "brick.h"
 #include "userinterface.h"
 
-const uint8_t level[AREA_TOTAL]={
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,MED___BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,LGHT__BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,DRK___BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,
-    NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK,NO____BRICK
-};
-
-void ResetToReady(){
-    ballState = BALLSTATE_READY;
-    score=0;
-
-    ResetUserInterface();
-
-    DrawLevelBricks(level);
-    ResetPaddle();
-    ResetBall();
-}
-
-
 void main(void){
 
     DISPLAY_ON;
@@ -67,63 +35,4 @@ void main(void){
 
     set_sprite_data(0,paddle_TILE_COUNT,paddle_tiles);
     set_sprite_data(paddle_TILE_COUNT,ball_TILE_COUNT,ball_tiles);
-
-
-    topScore=0;
-    stage=0;
-
-
-    ResetToReady();
-
-    while(1){
-
-        joypadPrevious=joypadCurrent;
-        joypadCurrent=joypad();
-
-        // Update the paddle
-        uint8_t lastSprite = UpdatePaddle();
-
-        // If the ball is ready
-        if(ballState==BALLSTATE_READY){
-
-            // Reset it's position
-            ballX=BALLSTART_X;
-            ballY=BALLSTART_Y;
-            
-            lastSprite = move_metasprite(ball_metasprites[0],paddle_TILE_COUNT,lastSprite,(ballX>>4)+7,(ballY>>4)+15);
-
-            // If the A button was JUST pressed
-            if((joypadCurrent & J_A) && !(joypadPrevious & J_A)){
-
-                // The ball is now active
-                ballState=BALLSTATE_ACTIVE;
-
-                // Randomly choose left or right
-                if(RandomNumber(0,100)<50)ballVelocityX=200;
-                else ballVelocityX=-200;
-
-                ballVelocityY=-RandomNumber(180,220);
-            }
-        }else{
-
-
-            // Update the ball
-            ballState=UpdateBall(lastSprite);
-
-            CollideBricksAgainstBall();
-            CollidePaddleAgainstBall();
-
-            if(blocksLeft==0){
-
-                stage++;
-
-                ResetToReady();
-
-            }
-        }
-
-
-        // Slow down the frame rate some
-        wait_vbl_done();
-    }
 }
