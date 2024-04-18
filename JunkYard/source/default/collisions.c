@@ -87,10 +87,10 @@ void CollideBricksAgainstBall(){
 
     uint8_t topBottomOrWall = CheckTopOrBottomBrick(ballX>>4,checkVertical);
 
+    DrawNumber3(17,14,horizontalSide*BALL_RADIUS,2);
+
     // If the ball hit something
     if(topBottomOrWall!=0){
-
-        ballVelocityY=-verticalSide*ABS(ballVelocityY);
 
         // Increase Speed slightly with each bounce
         ballVelocityY+=SIGN(ballVelocityY)*BALL_SPEEDUP;
@@ -98,6 +98,8 @@ void CollideBricksAgainstBall(){
         // If we didn't hit a wall
         if(topBottomOrWall!=WALL){
             
+            //Critical Change
+            ballVelocityY=-verticalSide*ABS(ballVelocityY);
             blocksLeft--;
 
             // Play a sound
@@ -122,8 +124,10 @@ void CollideBricksAgainstBall(){
     }
     
 
-    topBottomOrWall = CheckTopOrBottomBrick(checkHorizontal,ballY>>4);
-
+    //Critical Change
+    //topBottomOrWall = CheckTopOrBottomBrick(checkHorizontal,ballY>>4);
+    topBottomOrWall = CheckTopOrBottomBrick(ballX>>4,ballY>>4);
+    DrawNumber3(17,15,verticalSide*BALL_RADIUS,2);
 
     // If the ball hit something
     if(topBottomOrWall!=0){
