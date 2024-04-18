@@ -7,7 +7,8 @@
 uint8_t CheckTopOrBottomBrick(uint8_t x, uint8_t  y){
 
     if(x<=8) return WALL;
-    if(y<=8) return WALL;
+    //Critical Chance
+    //if(y<=8) return WALL;
     if(x>=120) return WALL;
 
     // Get the background tile at the given location
