@@ -13,16 +13,16 @@ void ResetPaddle(){
 uint8_t UpdatePaddle(){
 
     if(joypadCurrent & J_LEFT){
-        paddleXSpeed=-600;
+        paddleXSpeed=-500;
 
     }else if(joypadCurrent & J_RIGHT){
-        paddleXSpeed=600;
+        paddleXSpeed=500;
 
     }else{
 
         // Slow down
-        if(paddleXSpeed>30)paddleXSpeed-=30;
-        else if(paddleXSpeed<-30)paddleXSpeed+=30;
+        if(paddleXSpeed>50)paddleXSpeed-=50;
+        else if(paddleXSpeed<-50)paddleXSpeed+=50;
         else paddleXSpeed=0;
     }
 
