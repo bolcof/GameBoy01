@@ -1,0 +1,46 @@
+        1 個のファイルを移動しました。
+        1 個のファイルを移動しました。
+        1 個のファイルを移動しました。
+        1 個のファイルを移動しました。
+        1 個のファイルを移動しました。
+Compiling ball ...
+Compiling Bricks ...
+Compiling Font ...
+Compiling paddle ...
+Compiling UserInterface ...
+Compiling ball ...
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:39: warning 283: function declarator with no prototype
+Compiling brick ...
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:21: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:14: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:27: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:28: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:40: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:41: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:52: warning 110: conditional flow changed by optimizer: so said EVELYN the modified DOG
+Warning: Non-connected liverange found and extended to connected component of the CFG:iTemp0. Please contact sdcc authors with source code to reproduce.
+Compiling collisions ...
+headers/main/ball.h:5: warning 283: function declarator with no prototype
+headers/main/paddle.h:6: warning 283: function declarator with no prototype
+headers/main/paddle.h:7: warning 283: function declarator with no prototype
+headers/main/userinterface.h:4: warning 283: function declarator with no prototype
+headers/main/userinterface.h:5: warning 283: function declarator with no prototype
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\collisions.c:39: warning 283: function declarator with no prototype
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\collisions.c:80: warning 283: function declarator with no prototype
+Compiling common ...
+Compiling main ...
+headers/main/collisions.h:6: warning 283: function declarator with no prototype
+headers/main/collisions.h:7: warning 283: function declarator with no prototype
+headers/main/collisions.h:8: warning 283: function declarator with no prototype
+headers/main/ball.h:5: warning 283: function declarator with no prototype
+headers/main/paddle.h:6: warning 283: function declarator with no prototype
+headers/main/paddle.h:7: warning 283: function declarator with no prototype
+headers/main/userinterface.h:4: warning 283: function declarator with no prototype
+headers/main/userinterface.h:5: warning 283: function declarator with no prototype
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:37: warning 283: function declarator with no prototype
+Compiling paddle ...
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:5: warning 283: function declarator with no prototype
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:13: warning 283: function declarator with no prototype
+Compiling userinterface ...
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\userinterface.c:37: warning 283: function declarator with no prototype
+E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\userinterface.c:44: warning 283: function declarator with no prototype
