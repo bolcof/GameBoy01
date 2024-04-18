@@ -1,10 +1,40 @@
 #include <gb/gb.h>
+#include <stdlib.h>
 #include "common.h"
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
 #include "userinterface.h"
+#include <string.h>
+#include "graphics/Font.h"
+#include "graphics/Bricks.h"
 
+void DrawNumber3(uint8_t x,uint8_t y, uint16_t number,uint8_t digits){
+    
+    unsigned char buffer[]="00000000";
+
+    // Convert the number to a decimal string (stored in the buffer char array)
+    uitoa(number, buffer, 10);
+
+    // Get the length of the number so we can add leading zeroes
+    uint8_t len =strlen(buffer);
+
+    // Add some leading zeroes
+    // uitoa will not do this for us
+    // Increase the VRAM address each iteration to move to the next tile
+    for(uint8_t i=0;i<digits-len;i++){
+        VBK_REG=1; set_bkg_tile_xy(x,y,0);
+        VBK_REG=0;set_bkg_tile_xy(x++,y,USERINTERFACE_TILES_START+42);
+    }
+        
+    // Draw our number
+    // Increase the VRAM address each iteration to move to the next tile
+    for(uint8_t i=0;i<len;i++){
+        
+        VBK_REG=1;set_bkg_tile_xy(x,y,0);
+        VBK_REG=0;set_bkg_tile_xy(x++,y,(buffer[i]-'0')+USERINTERFACE_TILES_START+42);
+    }
+}
 
 void CollidePaddleAgainstBall(){
     int16_t xd = (int16_t)(ballX>>4)-(int16_t)(paddleX>>4);
