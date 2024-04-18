@@ -1,0 +1,530 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler 
+                                      3 ; Version 4.3.2 #14228 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -msm83
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _ResetToReady
+                                     13 	.globl _ResetUserInterface
+                                     14 	.globl _DrawLevelBricks
+                                     15 	.globl _ResetPaddle
+                                     16 	.globl _UpdatePaddle
+                                     17 	.globl _ResetBall
+                                     18 	.globl _UpdateBall
+                                     19 	.globl _CollideBricksAgainstBall
+                                     20 	.globl _CollidePaddleAgainstBall
+                                     21 	.globl _RandomNumber
+                                     22 	.globl _set_sprite_palette
+                                     23 	.globl _set_bkg_palette
+                                     24 	.globl _set_sprite_data
+                                     25 	.globl _set_bkg_data
+                                     26 	.globl _wait_vbl_done
+                                     27 	.globl _joypad
+                                     28 	.globl _level
+                                     29 ;--------------------------------------------------------
+                                     30 ; special function registers
+                                     31 ;--------------------------------------------------------
+                                     32 ;--------------------------------------------------------
+                                     33 ; ram data
+                                     34 ;--------------------------------------------------------
+                                     35 	.area _DATA
+                                     36 ;--------------------------------------------------------
+                                     37 ; ram data
+                                     38 ;--------------------------------------------------------
+                                     39 	.area _INITIALIZED
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area _DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area _HOME
+                                     48 	.area _GSINIT
+                                     49 	.area _GSFINAL
+                                     50 	.area _GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area _HOME
+                                     55 	.area _HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area _CODE
+                                     60 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:37: void ResetToReady(){
+                                     61 ;	---------------------------------
+                                     62 ; Function ResetToReady
+                                     63 ; ---------------------------------
+      000000                         64 _ResetToReady::
+                                     65 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:38: ballState = BALLSTATE_READY;
+      000000 21r00r00         [12]   66 	ld	hl, #_ballState
+      000003 36 00            [12]   67 	ld	(hl), #0x00
+                                     68 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:39: score=0;
+      000005 AF               [ 4]   69 	xor	a, a
+      000006 21r00r00         [12]   70 	ld	hl, #_score
+      000009 22               [ 8]   71 	ld	(hl+), a
+      00000A 77               [ 8]   72 	ld	(hl), a
+                                     73 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:41: ResetUserInterface();
+      00000B CDr00r00         [24]   74 	call	_ResetUserInterface
+                                     75 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:43: DrawLevelBricks(level);
+      00000E 11r1Ar00         [12]   76 	ld	de, #_level
+      000011 CDr00r00         [24]   77 	call	_DrawLevelBricks
+                                     78 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:44: ResetPaddle();
+      000014 CDr00r00         [24]   79 	call	_ResetPaddle
+                                     80 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:45: ResetBall();
+                                     81 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:46: }
+      000017 C3r00r00         [16]   82 	jp	_ResetBall
+      00001A                         83 _level:
+      00001A FF                      84 	.db #0xff	; 255
+      00001B FF                      85 	.db #0xff	; 255
+      00001C FF                      86 	.db #0xff	; 255
+      00001D FF                      87 	.db #0xff	; 255
+      00001E FF                      88 	.db #0xff	; 255
+      00001F FF                      89 	.db #0xff	; 255
+      000020 FF                      90 	.db #0xff	; 255
+      000021 FF                      91 	.db #0xff	; 255
+      000022 FF                      92 	.db #0xff	; 255
+      000023 FF                      93 	.db #0xff	; 255
+      000024 FF                      94 	.db #0xff	; 255
+      000025 FF                      95 	.db #0xff	; 255
+      000026 FF                      96 	.db #0xff	; 255
+      000027 FF                      97 	.db #0xff	; 255
+      000028 FF                      98 	.db #0xff	; 255
+      000029 FF                      99 	.db #0xff	; 255
+      00002A FF                     100 	.db #0xff	; 255
+      00002B FF                     101 	.db #0xff	; 255
+      00002C FF                     102 	.db #0xff	; 255
+      00002D FF                     103 	.db #0xff	; 255
+      00002E FF                     104 	.db #0xff	; 255
+      00002F FF                     105 	.db #0xff	; 255
+      000030 FF                     106 	.db #0xff	; 255
+      000031 FF                     107 	.db #0xff	; 255
+      000032 FF                     108 	.db #0xff	; 255
+      000033 FF                     109 	.db #0xff	; 255
+      000034 FF                     110 	.db #0xff	; 255
+      000035 FF                     111 	.db #0xff	; 255
+      000036 FF                     112 	.db #0xff	; 255
+      000037 FF                     113 	.db #0xff	; 255
+      000038 01                     114 	.db #0x01	; 1
+      000039 01                     115 	.db #0x01	; 1
+      00003A 01                     116 	.db #0x01	; 1
+      00003B 01                     117 	.db #0x01	; 1
+      00003C 01                     118 	.db #0x01	; 1
+      00003D 01                     119 	.db #0x01	; 1
+      00003E 01                     120 	.db #0x01	; 1
+      00003F 01                     121 	.db #0x01	; 1
+      000040 01                     122 	.db #0x01	; 1
+      000041 01                     123 	.db #0x01	; 1
+      000042 FF                     124 	.db #0xff	; 255
+      000043 FF                     125 	.db #0xff	; 255
+      000044 FF                     126 	.db #0xff	; 255
+      000045 FF                     127 	.db #0xff	; 255
+      000046 06                     128 	.db #0x06	; 6
+      000047 06                     129 	.db #0x06	; 6
+      000048 06                     130 	.db #0x06	; 6
+      000049 06                     131 	.db #0x06	; 6
+      00004A 06                     132 	.db #0x06	; 6
+      00004B 06                     133 	.db #0x06	; 6
+      00004C 06                     134 	.db #0x06	; 6
+      00004D 06                     135 	.db #0x06	; 6
+      00004E 06                     136 	.db #0x06	; 6
+      00004F 06                     137 	.db #0x06	; 6
+      000050 FF                     138 	.db #0xff	; 255
+      000051 FF                     139 	.db #0xff	; 255
+      000052 FF                     140 	.db #0xff	; 255
+      000053 FF                     141 	.db #0xff	; 255
+      000054 06                     142 	.db #0x06	; 6
+      000055 06                     143 	.db #0x06	; 6
+      000056 06                     144 	.db #0x06	; 6
+      000057 06                     145 	.db #0x06	; 6
+      000058 06                     146 	.db #0x06	; 6
+      000059 06                     147 	.db #0x06	; 6
+      00005A 06                     148 	.db #0x06	; 6
+      00005B 06                     149 	.db #0x06	; 6
+      00005C 06                     150 	.db #0x06	; 6
+      00005D 06                     151 	.db #0x06	; 6
+      00005E FF                     152 	.db #0xff	; 255
+      00005F FF                     153 	.db #0xff	; 255
+      000060 FF                     154 	.db #0xff	; 255
+      000061 FF                     155 	.db #0xff	; 255
+      000062 01                     156 	.db #0x01	; 1
+      000063 01                     157 	.db #0x01	; 1
+      000064 01                     158 	.db #0x01	; 1
+      000065 01                     159 	.db #0x01	; 1
+      000066 01                     160 	.db #0x01	; 1
+      000067 01                     161 	.db #0x01	; 1
+      000068 01                     162 	.db #0x01	; 1
+      000069 01                     163 	.db #0x01	; 1
+      00006A 01                     164 	.db #0x01	; 1
+      00006B 01                     165 	.db #0x01	; 1
+      00006C FF                     166 	.db #0xff	; 255
+      00006D FF                     167 	.db #0xff	; 255
+      00006E FF                     168 	.db #0xff	; 255
+      00006F FF                     169 	.db #0xff	; 255
+      000070 0B                     170 	.db #0x0b	; 11
+      000071 0B                     171 	.db #0x0b	; 11
+      000072 0B                     172 	.db #0x0b	; 11
+      000073 0B                     173 	.db #0x0b	; 11
+      000074 0B                     174 	.db #0x0b	; 11
+      000075 0B                     175 	.db #0x0b	; 11
+      000076 0B                     176 	.db #0x0b	; 11
+      000077 0B                     177 	.db #0x0b	; 11
+      000078 0B                     178 	.db #0x0b	; 11
+      000079 0B                     179 	.db #0x0b	; 11
+      00007A FF                     180 	.db #0xff	; 255
+      00007B FF                     181 	.db #0xff	; 255
+      00007C FF                     182 	.db #0xff	; 255
+      00007D FF                     183 	.db #0xff	; 255
+      00007E FF                     184 	.db #0xff	; 255
+      00007F FF                     185 	.db #0xff	; 255
+      000080 FF                     186 	.db #0xff	; 255
+      000081 FF                     187 	.db #0xff	; 255
+      000082 FF                     188 	.db #0xff	; 255
+      000083 FF                     189 	.db #0xff	; 255
+      000084 FF                     190 	.db #0xff	; 255
+      000085 FF                     191 	.db #0xff	; 255
+      000086 FF                     192 	.db #0xff	; 255
+      000087 FF                     193 	.db #0xff	; 255
+      000088 FF                     194 	.db #0xff	; 255
+      000089 FF                     195 	.db #0xff	; 255
+      00008A FF                     196 	.db #0xff	; 255
+      00008B FF                     197 	.db #0xff	; 255
+      00008C FF                     198 	.db #0xff	; 255
+      00008D FF                     199 	.db #0xff	; 255
+      00008E FF                     200 	.db #0xff	; 255
+      00008F FF                     201 	.db #0xff	; 255
+      000090 FF                     202 	.db #0xff	; 255
+      000091 FF                     203 	.db #0xff	; 255
+      000092 FF                     204 	.db #0xff	; 255
+      000093 FF                     205 	.db #0xff	; 255
+      000094 FF                     206 	.db #0xff	; 255
+      000095 FF                     207 	.db #0xff	; 255
+      000096 FF                     208 	.db #0xff	; 255
+      000097 FF                     209 	.db #0xff	; 255
+      000098 FF                     210 	.db #0xff	; 255
+      000099 FF                     211 	.db #0xff	; 255
+      00009A FF                     212 	.db #0xff	; 255
+      00009B FF                     213 	.db #0xff	; 255
+      00009C FF                     214 	.db #0xff	; 255
+      00009D FF                     215 	.db #0xff	; 255
+      00009E FF                     216 	.db #0xff	; 255
+      00009F FF                     217 	.db #0xff	; 255
+      0000A0 FF                     218 	.db #0xff	; 255
+      0000A1 FF                     219 	.db #0xff	; 255
+      0000A2 FF                     220 	.db #0xff	; 255
+      0000A3 FF                     221 	.db #0xff	; 255
+      0000A4 FF                     222 	.db #0xff	; 255
+      0000A5 FF                     223 	.db #0xff	; 255
+      0000A6 FF                     224 	.db #0xff	; 255
+      0000A7 FF                     225 	.db #0xff	; 255
+      0000A8 FF                     226 	.db #0xff	; 255
+      0000A9 FF                     227 	.db #0xff	; 255
+      0000AA FF                     228 	.db #0xff	; 255
+      0000AB FF                     229 	.db #0xff	; 255
+      0000AC FF                     230 	.db #0xff	; 255
+      0000AD FF                     231 	.db #0xff	; 255
+      0000AE FF                     232 	.db #0xff	; 255
+      0000AF FF                     233 	.db #0xff	; 255
+      0000B0 FF                     234 	.db #0xff	; 255
+      0000B1 FF                     235 	.db #0xff	; 255
+      0000B2 FF                     236 	.db #0xff	; 255
+      0000B3 FF                     237 	.db #0xff	; 255
+      0000B4 FF                     238 	.db #0xff	; 255
+      0000B5 FF                     239 	.db #0xff	; 255
+      0000B6 FF                     240 	.db #0xff	; 255
+      0000B7 FF                     241 	.db #0xff	; 255
+      0000B8 FF                     242 	.db #0xff	; 255
+      0000B9 FF                     243 	.db #0xff	; 255
+      0000BA FF                     244 	.db #0xff	; 255
+      0000BB FF                     245 	.db #0xff	; 255
+      0000BC FF                     246 	.db #0xff	; 255
+      0000BD FF                     247 	.db #0xff	; 255
+      0000BE FF                     248 	.db #0xff	; 255
+      0000BF FF                     249 	.db #0xff	; 255
+      0000C0 FF                     250 	.db #0xff	; 255
+      0000C1 FF                     251 	.db #0xff	; 255
+      0000C2 FF                     252 	.db #0xff	; 255
+      0000C3 FF                     253 	.db #0xff	; 255
+      0000C4 FF                     254 	.db #0xff	; 255
+      0000C5 FF                     255 	.db #0xff	; 255
+      0000C6 FF                     256 	.db #0xff	; 255
+      0000C7 FF                     257 	.db #0xff	; 255
+      0000C8 FF                     258 	.db #0xff	; 255
+      0000C9 FF                     259 	.db #0xff	; 255
+      0000CA FF                     260 	.db #0xff	; 255
+      0000CB FF                     261 	.db #0xff	; 255
+      0000CC FF                     262 	.db #0xff	; 255
+      0000CD FF                     263 	.db #0xff	; 255
+      0000CE FF                     264 	.db #0xff	; 255
+      0000CF FF                     265 	.db #0xff	; 255
+      0000D0 FF                     266 	.db #0xff	; 255
+      0000D1 FF                     267 	.db #0xff	; 255
+      0000D2 FF                     268 	.db #0xff	; 255
+      0000D3 FF                     269 	.db #0xff	; 255
+      0000D4 FF                     270 	.db #0xff	; 255
+      0000D5 FF                     271 	.db #0xff	; 255
+      0000D6 FF                     272 	.db #0xff	; 255
+      0000D7 FF                     273 	.db #0xff	; 255
+      0000D8 FF                     274 	.db #0xff	; 255
+      0000D9 FF                     275 	.db #0xff	; 255
+      0000DA FF                     276 	.db #0xff	; 255
+      0000DB FF                     277 	.db #0xff	; 255
+      0000DC FF                     278 	.db #0xff	; 255
+      0000DD FF                     279 	.db #0xff	; 255
+      0000DE FF                     280 	.db #0xff	; 255
+      0000DF FF                     281 	.db #0xff	; 255
+      0000E0 FF                     282 	.db #0xff	; 255
+      0000E1 FF                     283 	.db #0xff	; 255
+      0000E2 FF                     284 	.db #0xff	; 255
+      0000E3 FF                     285 	.db #0xff	; 255
+      0000E4 FF                     286 	.db #0xff	; 255
+      0000E5 FF                     287 	.db #0xff	; 255
+      0000E6 FF                     288 	.db #0xff	; 255
+      0000E7 FF                     289 	.db #0xff	; 255
+      0000E8 FF                     290 	.db #0xff	; 255
+      0000E9 FF                     291 	.db #0xff	; 255
+      0000EA FF                     292 	.db #0xff	; 255
+      0000EB FF                     293 	.db #0xff	; 255
+      0000EC FF                     294 	.db #0xff	; 255
+      0000ED FF                     295 	.db #0xff	; 255
+      0000EE FF                     296 	.db #0xff	; 255
+      0000EF FF                     297 	.db #0xff	; 255
+      0000F0 FF                     298 	.db #0xff	; 255
+      0000F1 FF                     299 	.db #0xff	; 255
+      0000F2 FF                     300 	.db #0xff	; 255
+      0000F3 FF                     301 	.db #0xff	; 255
+      0000F4 FF                     302 	.db #0xff	; 255
+      0000F5 FF                     303 	.db #0xff	; 255
+      0000F6 FF                     304 	.db #0xff	; 255
+      0000F7 FF                     305 	.db #0xff	; 255
+      0000F8 FF                     306 	.db #0xff	; 255
+      0000F9 FF                     307 	.db #0xff	; 255
+      0000FA FF                     308 	.db #0xff	; 255
+      0000FB FF                     309 	.db #0xff	; 255
+      0000FC FF                     310 	.db #0xff	; 255
+      0000FD FF                     311 	.db #0xff	; 255
+      0000FE FF                     312 	.db #0xff	; 255
+      0000FF FF                     313 	.db #0xff	; 255
+      000100 FF                     314 	.db #0xff	; 255
+      000101 FF                     315 	.db #0xff	; 255
+      000102 FF                     316 	.db #0xff	; 255
+      000103 FF                     317 	.db #0xff	; 255
+      000104 FF                     318 	.db #0xff	; 255
+      000105 FF                     319 	.db #0xff	; 255
+      000106 FF                     320 	.db #0xff	; 255
+      000107 FF                     321 	.db #0xff	; 255
+                                    322 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:49: void main(void){
+                                    323 ;	---------------------------------
+                                    324 ; Function main
+                                    325 ; ---------------------------------
+      000108                        326 _main::
+                                    327 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:51: DISPLAY_ON;
+      000108 F0r00            [12]  328 	ldh	a, (_LCDC_REG + 0)
+      00010A F6 80            [ 8]  329 	or	a, #0x80
+      00010C E0r00            [12]  330 	ldh	(_LCDC_REG + 0), a
+                                    331 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:52: SHOW_SPRITES;
+      00010E F0r00            [12]  332 	ldh	a, (_LCDC_REG + 0)
+      000110 F6 02            [ 8]  333 	or	a, #0x02
+      000112 E0r00            [12]  334 	ldh	(_LCDC_REG + 0), a
+                                    335 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:53: SHOW_BKG;
+      000114 F0r00            [12]  336 	ldh	a, (_LCDC_REG + 0)
+      000116 F6 01            [ 8]  337 	or	a, #0x01
+      000118 E0r00            [12]  338 	ldh	(_LCDC_REG + 0), a
+                                    339 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:54: SPRITES_8x8;
+      00011A F0r00            [12]  340 	ldh	a, (_LCDC_REG + 0)
+      00011C E6 FB            [ 8]  341 	and	a, #0xfb
+      00011E E0r00            [12]  342 	ldh	(_LCDC_REG + 0), a
+                                    343 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:57: NR52_REG = 0x80;
+      000120 3E 80            [ 8]  344 	ld	a, #0x80
+      000122 E0r00            [12]  345 	ldh	(_NR52_REG + 0), a
+                                    346 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:58: NR51_REG = 0xFF;
+      000124 3E FF            [ 8]  347 	ld	a, #0xff
+      000126 E0r00            [12]  348 	ldh	(_NR51_REG + 0), a
+                                    349 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:59: NR50_REG = 0x77;
+      000128 3E 77            [ 8]  350 	ld	a, #0x77
+      00012A E0r00            [12]  351 	ldh	(_NR50_REG + 0), a
+                                    352 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:61: set_sprite_palette(0,1,BlackAndWhitePalette);
+      00012C 11r00r00         [12]  353 	ld	de, #_BlackAndWhitePalette
+      00012F D5               [16]  354 	push	de
+      000130 AF               [ 4]  355 	xor	a, a
+      000131 3C               [ 4]  356 	inc	a
+      000132 F5               [16]  357 	push	af
+      000133 CDr00r00         [24]  358 	call	_set_sprite_palette
+      000136 E8 04            [16]  359 	add	sp, #4
+                                    360 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:62: set_bkg_palette(0,1,BlackAndWhitePalette);
+      000138 11r00r00         [12]  361 	ld	de, #_BlackAndWhitePalette
+      00013B D5               [16]  362 	push	de
+      00013C AF               [ 4]  363 	xor	a, a
+      00013D 3C               [ 4]  364 	inc	a
+      00013E F5               [16]  365 	push	af
+      00013F CDr00r00         [24]  366 	call	_set_bkg_palette
+      000142 E8 04            [16]  367 	add	sp, #4
+                                    368 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:64: set_bkg_data(0,Bricks_TILE_COUNT,Bricks_tiles);
+      000144 11r00r00         [12]  369 	ld	de, #_Bricks_tiles
+      000147 D5               [16]  370 	push	de
+      000148 21 00 11         [12]  371 	ld	hl, #0x1100
+      00014B E5               [16]  372 	push	hl
+      00014C CDr00r00         [24]  373 	call	_set_bkg_data
+      00014F E8 04            [16]  374 	add	sp, #4
+                                    375 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:65: set_bkg_data(USERINTERFACE_TILES_START,UserInterface_TILE_COUNT,UserInterface_tiles);
+      000151 11r00r00         [12]  376 	ld	de, #_UserInterface_tiles
+      000154 D5               [16]  377 	push	de
+      000155 21 11 10         [12]  378 	ld	hl, #0x1011
+      000158 E5               [16]  379 	push	hl
+      000159 CDr00r00         [24]  380 	call	_set_bkg_data
+      00015C E8 04            [16]  381 	add	sp, #4
+                                    382 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:66: set_bkg_data(FONT_TILES_START,Font_TILE_COUNT,Font_tiles);
+      00015E 11r00r00         [12]  383 	ld	de, #_Font_tiles
+      000161 D5               [16]  384 	push	de
+      000162 21 21 2A         [12]  385 	ld	hl, #0x2a21
+      000165 E5               [16]  386 	push	hl
+      000166 CDr00r00         [24]  387 	call	_set_bkg_data
+      000169 E8 04            [16]  388 	add	sp, #4
+                                    389 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:68: set_sprite_data(0,paddle_TILE_COUNT,paddle_tiles);
+      00016B 11r00r00         [12]  390 	ld	de, #_paddle_tiles
+      00016E D5               [16]  391 	push	de
+      00016F 21 00 03         [12]  392 	ld	hl, #0x300
+      000172 E5               [16]  393 	push	hl
+      000173 CDr00r00         [24]  394 	call	_set_sprite_data
+      000176 E8 04            [16]  395 	add	sp, #4
+                                    396 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:69: set_sprite_data(paddle_TILE_COUNT,ball_TILE_COUNT,ball_tiles);
+      000178 11r00r00         [12]  397 	ld	de, #_ball_tiles
+      00017B D5               [16]  398 	push	de
+      00017C 21 03 01         [12]  399 	ld	hl, #0x103
+      00017F E5               [16]  400 	push	hl
+      000180 CDr00r00         [24]  401 	call	_set_sprite_data
+      000183 E8 04            [16]  402 	add	sp, #4
+                                    403 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:72: topScore=0;
+      000185 AF               [ 4]  404 	xor	a, a
+      000186 21r00r00         [12]  405 	ld	hl, #_topScore
+      000189 22               [ 8]  406 	ld	(hl+), a
+      00018A 77               [ 8]  407 	ld	(hl), a
+                                    408 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:73: stage=0;
+      00018B 21r00r00         [12]  409 	ld	hl, #_stage
+      00018E 36 00            [12]  410 	ld	(hl), #0x00
+                                    411 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:76: ResetToReady();
+      000190 CDr00r00         [24]  412 	call	_ResetToReady
+                                    413 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:78: while(1){
+      000193                        414 00113$:
+                                    415 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:80: joypadPrevious=joypadCurrent;
+      000193 FAr00r00         [16]  416 	ld	a, (#_joypadCurrent)
+      000196 EAr00r00         [16]  417 	ld	(#_joypadPrevious),a
+                                    418 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:81: joypadCurrent=joypad();
+      000199 CDr00r00         [24]  419 	call	_joypad
+      00019C EAr00r00         [16]  420 	ld	(#_joypadCurrent),a
+                                    421 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:84: uint8_t lastSprite = UpdatePaddle();
+      00019F CDr00r00         [24]  422 	call	_UpdatePaddle
+      0001A2 4F               [ 4]  423 	ld	c, a
+                                    424 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:87: if(ballState==BALLSTATE_READY){
+      0001A3 FAr00r00         [16]  425 	ld	a, (#_ballState)
+      0001A6 B7               [ 4]  426 	or	a, a
+      0001A7 20 72            [12]  427 	jr	NZ, 00110$
+                                    428 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:90: ballX=BALLSTART_X;
+      0001A9 21r00r00         [12]  429 	ld	hl, #_ballX
+      0001AC AF               [ 4]  430 	xor	a, a
+      0001AD 22               [ 8]  431 	ld	(hl+), a
+      0001AE 36 04            [12]  432 	ld	(hl), #0x04
+                                    433 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:91: ballY=BALLSTART_Y;
+      0001B0 21r00r00         [12]  434 	ld	hl, #_ballY
+      0001B3 3E 80            [ 8]  435 	ld	a, #0x80
+      0001B5 22               [ 8]  436 	ld	(hl+), a
+      0001B6 36 06            [12]  437 	ld	(hl), #0x06
+                                    438 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:93: lastSprite = move_metasprite(ball_metasprites[0],paddle_TILE_COUNT,lastSprite,(ballX>>4)+7,(ballY>>4)+15);
+      0001B8 21r00r00         [12]  439 	ld	hl, #_ball_metasprites
+      0001BB 2A               [ 8]  440 	ld	a, (hl+)
+      0001BC 47               [ 4]  441 	ld	b, a
+      0001BD 7E               [ 8]  442 	ld	a, (hl)
+                                    443 ;e:\make_202008\gameboy\gbdk-win64\gbdk\include\gb\metasprites.h:160: __current_metasprite = metasprite;
+      0001BE 21r00r00         [12]  444 	ld	hl, #___current_metasprite
+      0001C1 70               [ 8]  445 	ld	(hl), b
+      0001C2 23               [ 8]  446 	inc	hl
+      0001C3 77               [ 8]  447 	ld	(hl), a
+                                    448 ;e:\make_202008\gameboy\gbdk-win64\gbdk\include\gb\metasprites.h:161: __current_base_tile = base_tile;
+      0001C4 21r00r00         [12]  449 	ld	hl, #___current_base_tile
+      0001C7 36 03            [12]  450 	ld	(hl), #0x03
+                                    451 ;e:\make_202008\gameboy\gbdk-win64\gbdk\include\gb\metasprites.h:162: __current_base_prop = 0;
+      0001C9 21r00r00         [12]  452 	ld	hl, #___current_base_prop
+      0001CC 36 00            [12]  453 	ld	(hl), #0x00
+                                    454 ;e:\make_202008\gameboy\gbdk-win64\gbdk\include\gb\metasprites.h:163: return __move_metasprite(base_sprite, (y << 8) | (uint8_t)x);
+      0001CE 11 47 77         [12]  455 	ld	de, #0x7747
+      0001D1 79               [ 4]  456 	ld	a, c
+      0001D2 CDr00r00         [24]  457 	call	___move_metasprite
+                                    458 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:96: if((joypadCurrent & J_A) && !(joypadPrevious & J_A)){
+      0001D5 FAr00r00         [16]  459 	ld	a, (#_joypadCurrent)
+      0001D8 CB 67            [ 8]  460 	bit	4, a
+      0001DA 28 5A            [12]  461 	jr	Z, 00111$
+      0001DC FAr00r00         [16]  462 	ld	a, (#_joypadPrevious)
+      0001DF CB 67            [ 8]  463 	bit	4, a
+      0001E1 20 53            [12]  464 	jr	NZ, 00111$
+                                    465 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:99: ballState=BALLSTATE_ACTIVE;
+      0001E3 21r00r00         [12]  466 	ld	hl, #_ballState
+      0001E6 36 01            [12]  467 	ld	(hl), #0x01
+                                    468 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:102: if(RandomNumber(0,100)<50)ballVelocityX=200;
+      0001E8 1E 64            [ 8]  469 	ld	e, #0x64
+      0001EA AF               [ 4]  470 	xor	a, a
+      0001EB CDr00r00         [24]  471 	call	_RandomNumber
+      0001EE D6 32            [ 8]  472 	sub	a, #0x32
+      0001F0 30 0A            [12]  473 	jr	NC, 00102$
+      0001F2 21r00r00         [12]  474 	ld	hl, #_ballVelocityX
+      0001F5 3E C8            [ 8]  475 	ld	a, #0xc8
+      0001F7 22               [ 8]  476 	ld	(hl+), a
+      0001F8 AF               [ 4]  477 	xor	a, a
+      0001F9 77               [ 8]  478 	ld	(hl), a
+      0001FA 18 08            [12]  479 	jr	00103$
+      0001FC                        480 00102$:
+                                    481 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:103: else ballVelocityX=-200;
+      0001FC 21r00r00         [12]  482 	ld	hl, #_ballVelocityX
+      0001FF 3E 38            [ 8]  483 	ld	a, #0x38
+      000201 22               [ 8]  484 	ld	(hl+), a
+      000202 36 FF            [12]  485 	ld	(hl), #0xff
+      000204                        486 00103$:
+                                    487 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:105: ballVelocityY=-RandomNumber(180,220);
+      000204 1E DC            [ 8]  488 	ld	e, #0xdc
+      000206 3E B4            [ 8]  489 	ld	a, #0xb4
+      000208 CDr00r00         [24]  490 	call	_RandomNumber
+      00020B 4F               [ 4]  491 	ld	c, a
+      00020C AF               [ 4]  492 	xor	a, a
+      00020D 47               [ 4]  493 	ld	b, a
+      00020E 91               [ 4]  494 	sub	a, c
+      00020F 4F               [ 4]  495 	ld	c, a
+      000210 9F               [ 4]  496 	sbc	a, a
+      000211 90               [ 4]  497 	sub	a, b
+      000212 47               [ 4]  498 	ld	b, a
+      000213 21r00r00         [12]  499 	ld	hl, #_ballVelocityY
+      000216 79               [ 4]  500 	ld	a, c
+      000217 22               [ 8]  501 	ld	(hl+), a
+      000218 70               [ 8]  502 	ld	(hl), b
+      000219 18 1B            [12]  503 	jr	00111$
+      00021B                        504 00110$:
+                                    505 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:111: ballState=UpdateBall(lastSprite);
+      00021B 79               [ 4]  506 	ld	a, c
+      00021C CDr00r00         [24]  507 	call	_UpdateBall
+      00021F EAr00r00         [16]  508 	ld	(#_ballState),a
+                                    509 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:113: CollideBricksAgainstBall();
+      000222 CDr00r00         [24]  510 	call	_CollideBricksAgainstBall
+                                    511 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:114: CollidePaddleAgainstBall();
+      000225 CDr00r00         [24]  512 	call	_CollidePaddleAgainstBall
+                                    513 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:116: if(blocksLeft==0){
+      000228 21r01r00         [12]  514 	ld	hl, #_blocksLeft + 1
+      00022B 3A               [ 8]  515 	ld	a, (hl-)
+      00022C B6               [ 8]  516 	or	a, (hl)
+      00022D 20 07            [12]  517 	jr	NZ, 00111$
+                                    518 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:118: stage++;
+      00022F 21r00r00         [12]  519 	ld	hl, #_stage
+      000232 34               [12]  520 	inc	(hl)
+                                    521 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:120: ResetToReady();
+      000233 CDr00r00         [24]  522 	call	_ResetToReady
+      000236                        523 00111$:
+                                    524 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:127: wait_vbl_done();
+      000236 CDr00r00         [24]  525 	call	_wait_vbl_done
+                                    526 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\main.c:129: }
+      000239 C3r93r01         [16]  527 	jp	00113$
+                                    528 	.area _CODE
+                                    529 	.area _INITIALIZER
+                                    530 	.area _CABS (ABS)

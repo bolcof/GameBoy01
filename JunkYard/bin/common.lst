@@ -1,0 +1,154 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler 
+                                      3 ; Version 4.3.2 #14228 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module common
+                                      6 	.optsdcc -msm83
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _joypadCurrent
+                                     12 	.globl _joypadPrevious
+                                     13 	.globl _ballState
+                                     14 	.globl _topScore
+                                     15 	.globl _score
+                                     16 	.globl _stage
+                                     17 	.globl _ballVelocityY
+                                     18 	.globl _ballVelocityX
+                                     19 	.globl _ballAngle
+                                     20 	.globl _ballY
+                                     21 	.globl _ballX
+                                     22 	.globl _blocksLeft
+                                     23 	.globl _paddleXSpeed
+                                     24 	.globl _paddleY
+                                     25 	.globl _paddleX
+                                     26 	.globl _BlackAndWhitePalette
+                                     27 	.globl _RandomNumber
+                                     28 ;--------------------------------------------------------
+                                     29 ; special function registers
+                                     30 ;--------------------------------------------------------
+                                     31 ;--------------------------------------------------------
+                                     32 ; ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area _DATA
+                                     35 ;--------------------------------------------------------
+                                     36 ; ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area _INITIALIZED
+      000000                         39 _paddleX::
+      000000                         40 	.ds 2
+      000002                         41 _paddleY::
+      000002                         42 	.ds 2
+      000004                         43 _paddleXSpeed::
+      000004                         44 	.ds 2
+      000006                         45 _blocksLeft::
+      000006                         46 	.ds 2
+      000008                         47 _ballX::
+      000008                         48 	.ds 2
+      00000A                         49 _ballY::
+      00000A                         50 	.ds 2
+      00000C                         51 _ballAngle::
+      00000C                         52 	.ds 2
+      00000E                         53 _ballVelocityX::
+      00000E                         54 	.ds 2
+      000010                         55 _ballVelocityY::
+      000010                         56 	.ds 2
+      000012                         57 _stage::
+      000012                         58 	.ds 1
+      000013                         59 _score::
+      000013                         60 	.ds 2
+      000015                         61 _topScore::
+      000015                         62 	.ds 2
+      000017                         63 _ballState::
+      000017                         64 	.ds 1
+      000018                         65 _joypadPrevious::
+      000018                         66 	.ds 1
+      000019                         67 _joypadCurrent::
+      000019                         68 	.ds 1
+                                     69 ;--------------------------------------------------------
+                                     70 ; absolute external ram data
+                                     71 ;--------------------------------------------------------
+                                     72 	.area _DABS (ABS)
+                                     73 ;--------------------------------------------------------
+                                     74 ; global & static initialisations
+                                     75 ;--------------------------------------------------------
+                                     76 	.area _HOME
+                                     77 	.area _GSINIT
+                                     78 	.area _GSFINAL
+                                     79 	.area _GSINIT
+                                     80 ;--------------------------------------------------------
+                                     81 ; Home
+                                     82 ;--------------------------------------------------------
+                                     83 	.area _HOME
+                                     84 	.area _HOME
+                                     85 ;--------------------------------------------------------
+                                     86 ; code
+                                     87 ;--------------------------------------------------------
+                                     88 	.area _CODE
+                                     89 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:27: uint8_t RandomNumber(uint8_t min, uint8_t max)
+                                     90 ;	---------------------------------
+                                     91 ; Function RandomNumber
+                                     92 ; ---------------------------------
+      000000                         93 _RandomNumber::
+      000000 6F               [ 4]   94 	ld	l, a
+                                     95 ;	spillPairReg hl
+                                     96 ;	spillPairReg hl
+      000001 7B               [ 4]   97 	ld	a, e
+                                     98 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:31: return min + (DIV_REG % (max - min)); 
+      000002 06 00            [ 8]   99 	ld	b, #0x00
+      000004 5D               [ 4]  100 	ld	e, l
+      000005 16 00            [ 8]  101 	ld	d, #0x00
+      000007 93               [ 4]  102 	sub	a, e
+      000008 4F               [ 4]  103 	ld	c, a
+      000009 78               [ 4]  104 	ld	a, b
+      00000A 9A               [ 4]  105 	sbc	a, d
+      00000B 47               [ 4]  106 	ld	b, a
+      00000C F0r00            [12]  107 	ldh	a, (_DIV_REG + 0)
+      00000E 5F               [ 4]  108 	ld	e, a
+      00000F 16 00            [ 8]  109 	ld	d, #0x00
+      000011 E5               [16]  110 	push	hl
+      000012 CDr00r00         [24]  111 	call	__modsint
+      000015 E1               [12]  112 	pop	hl
+      000016 79               [ 4]  113 	ld	a, c
+      000017 85               [ 4]  114 	add	a, l
+                                    115 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:32: }
+      000018 C9               [16]  116 	ret
+      000019                        117 _BlackAndWhitePalette:
+      000019 FF 7F                  118 	.dw #0x7fff
+      00001B B5 56                  119 	.dw #0x56b5
+      00001D A5 14                  120 	.dw #0x14a5
+      00001F 00 00                  121 	.dw #0x0000
+                                    122 	.area _CODE
+                                    123 	.area _INITIALIZER
+      000000                        124 __xinit__paddleX:
+      000000 00 00                  125 	.dw #0x0000
+      000002                        126 __xinit__paddleY:
+      000002 00 00                  127 	.dw #0x0000
+      000004                        128 __xinit__paddleXSpeed:
+      000004 00 00                  129 	.dw #0x0000
+      000006                        130 __xinit__blocksLeft:
+      000006 00 00                  131 	.dw #0x0000
+      000008                        132 __xinit__ballX:
+      000008 00 00                  133 	.dw #0x0000
+      00000A                        134 __xinit__ballY:
+      00000A 00 00                  135 	.dw #0x0000
+      00000C                        136 __xinit__ballAngle:
+      00000C 2D 00                  137 	.dw #0x002d
+      00000E                        138 __xinit__ballVelocityX:
+      00000E 00 00                  139 	.dw #0x0000
+      000010                        140 __xinit__ballVelocityY:
+      000010 00 00                  141 	.dw #0x0000
+      000012                        142 __xinit__stage:
+      000012 00                     143 	.db #0x00	; 0
+      000013                        144 __xinit__score:
+      000013 00 00                  145 	.dw #0x0000
+      000015                        146 __xinit__topScore:
+      000015 00 00                  147 	.dw #0x0000
+      000017                        148 __xinit__ballState:
+      000017 00                     149 	.db #0x00	; 0
+      000018                        150 __xinit__joypadPrevious:
+      000018 00                     151 	.db #0x00	; 0
+      000019                        152 __xinit__joypadCurrent:
+      000019 00                     153 	.db #0x00	; 0
+                                    154 	.area _CABS (ABS)
