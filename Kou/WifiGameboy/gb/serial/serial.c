@@ -27,7 +27,7 @@ void drawScreen() {
 }
 
 void updateArrowPosition() {
-    move_sprite(0, 8, 24 + 16 * currentSelection); // Adjust vertical position of the arrow
+    move_sprite(0, 8, 24 + 8 * currentSelection); // Adjust vertical position of the arrow
 }
 
 void updateSelection(uint8_t joypadState) {
