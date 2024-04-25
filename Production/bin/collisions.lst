@@ -1,0 +1,1179 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler 
+                                      3 ; Version 4.3.2 #14228 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module collisions
+                                      6 	.optsdcc -msm83
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _CollideBricksAgainstBall
+                                     12 	.globl _CollidePaddleAgainstBall
+                                     13 	.globl _DrawNumber3
+                                     14 	.globl _strlen
+                                     15 	.globl _IncreaseScore
+                                     16 	.globl _UpdateBrick
+                                     17 	.globl _CheckTopOrBottomBrick
+                                     18 	.globl _uitoa
+                                     19 	.globl _set_bkg_tile_xy
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area _DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area _INITIALIZED
+                                     31 ;--------------------------------------------------------
+                                     32 ; absolute external ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area _DABS (ABS)
+                                     35 ;--------------------------------------------------------
+                                     36 ; global & static initialisations
+                                     37 ;--------------------------------------------------------
+                                     38 	.area _HOME
+                                     39 	.area _GSINIT
+                                     40 	.area _GSFINAL
+                                     41 	.area _GSINIT
+                                     42 ;--------------------------------------------------------
+                                     43 ; Home
+                                     44 ;--------------------------------------------------------
+                                     45 	.area _HOME
+                                     46 	.area _HOME
+                                     47 ;--------------------------------------------------------
+                                     48 ; code
+                                     49 ;--------------------------------------------------------
+                                     50 	.area _CODE
+                                     51 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:12: void DrawNumber3(uint8_t x,uint8_t y, uint16_t number,uint8_t digits){
+                                     52 ;	---------------------------------
+                                     53 ; Function DrawNumber3
+                                     54 ; ---------------------------------
+      000000                         55 _DrawNumber3::
+      000000 E8 EF            [16]   56 	add	sp, #-17
+      000002 47               [ 4]   57 	ld	b, a
+      000003 4B               [ 4]   58 	ld	c, e
+                                     59 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:14: unsigned char buffer[]="00000000";
+      000004 F8 00            [12]   60 	ldhl	sp,	#0
+      000006 3E 30            [ 8]   61 	ld	a,#0x30
+      000008 22               [ 8]   62 	ld	(hl+),a
+      000009 22               [ 8]   63 	ld	(hl+), a
+      00000A 3E 30            [ 8]   64 	ld	a,#0x30
+      00000C 22               [ 8]   65 	ld	(hl+),a
+      00000D 22               [ 8]   66 	ld	(hl+), a
+      00000E 3E 30            [ 8]   67 	ld	a,#0x30
+      000010 22               [ 8]   68 	ld	(hl+),a
+      000011 22               [ 8]   69 	ld	(hl+), a
+      000012 3E 30            [ 8]   70 	ld	a,#0x30
+      000014 22               [ 8]   71 	ld	(hl+),a
+      000015 22               [ 8]   72 	ld	(hl+), a
+      000016 36 00            [12]   73 	ld	(hl), #0x00
+                                     74 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:17: uitoa(number, buffer, 10);
+      000018 F8 13            [12]   75 	ldhl	sp,	#19
+      00001A 2A               [ 8]   76 	ld	a, (hl+)
+      00001B 5F               [ 4]   77 	ld	e, a
+      00001C 56               [ 8]   78 	ld	d, (hl)
+      00001D C5               [16]   79 	push	bc
+      00001E 3E 0A            [ 8]   80 	ld	a, #0x0a
+      000020 F5               [16]   81 	push	af
+      000021 33               [ 8]   82 	inc	sp
+      000022 21 03 00         [12]   83 	ld	hl, #3
+      000025 39               [ 8]   84 	add	hl, sp
+      000026 E5               [16]   85 	push	hl
+      000027 D5               [16]   86 	push	de
+      000028 CDr00r00         [24]   87 	call	_uitoa
+      00002B E8 05            [16]   88 	add	sp, #5
+      00002D C1               [12]   89 	pop	bc
+                                     90 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:20: uint8_t len =strlen(buffer);
+      00002E 21 00 00         [12]   91 	ld	hl, #0
+      000031 39               [ 8]   92 	add	hl, sp
+      000032 E5               [16]   93 	push	hl
+      000033 CDr00r00         [24]   94 	call	_strlen
+      000036 E1               [12]   95 	pop	hl
+      000037 F8 09            [12]   96 	ldhl	sp,	#9
+      000039 73               [ 8]   97 	ld	(hl), e
+                                     98 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:25: for(uint8_t i=0;i<digits-len;i++){
+      00003A F8 10            [12]   99 	ldhl	sp,	#16
+      00003C 70               [ 8]  100 	ld	(hl), b
+      00003D 06 00            [ 8]  101 	ld	b, #0x00
+      00003F                        102 00104$:
+      00003F F8 15            [12]  103 	ldhl	sp,	#21
+      000041 7E               [ 8]  104 	ld	a, (hl)
+      000042 F8 0A            [12]  105 	ldhl	sp,	#10
+      000044 22               [ 8]  106 	ld	(hl+), a
+      000045 AF               [ 4]  107 	xor	a, a
+      000046 32               [ 8]  108 	ld	(hl-), a
+      000047 2B               [ 8]  109 	dec	hl
+      000048 7E               [ 8]  110 	ld	a, (hl)
+      000049 F8 0C            [12]  111 	ldhl	sp,	#12
+      00004B 22               [ 8]  112 	ld	(hl+), a
+      00004C AF               [ 4]  113 	xor	a, a
+      00004D 32               [ 8]  114 	ld	(hl-), a
+      00004E 2B               [ 8]  115 	dec	hl
+      00004F 2B               [ 8]  116 	dec	hl
+      000050 2A               [ 8]  117 	ld	a, (hl+)
+      000051 5F               [ 4]  118 	ld	e, a
+      000052 2A               [ 8]  119 	ld	a, (hl+)
+      000053 57               [ 4]  120 	ld	d, a
+      000054 2A               [ 8]  121 	ld	a,	(hl+)
+      000055 66               [ 8]  122 	ld	h, (hl)
+      000056 6F               [ 4]  123 	ld	l, a
+      000057 7B               [ 4]  124 	ld	a, e
+      000058 95               [ 4]  125 	sub	a, l
+      000059 5F               [ 4]  126 	ld	e, a
+      00005A 7A               [ 4]  127 	ld	a, d
+      00005B 9C               [ 4]  128 	sbc	a, h
+      00005C F8 0F            [12]  129 	ldhl	sp,	#15
+      00005E 32               [ 8]  130 	ld	(hl-), a
+      00005F 7B               [ 4]  131 	ld	a, e
+      000060 32               [ 8]  132 	ld	(hl-), a
+      000061 2B               [ 8]  133 	dec	hl
+      000062 78               [ 4]  134 	ld	a, b
+      000063 22               [ 8]  135 	ld	(hl+), a
+      000064 36 00            [12]  136 	ld	(hl), #0x00
+      000066 F8 0C            [12]  137 	ldhl	sp,	#12
+      000068 5D               [ 4]  138 	ld	e, l
+      000069 54               [ 4]  139 	ld	d, h
+      00006A F8 0E            [12]  140 	ldhl	sp,	#14
+      00006C 1A               [ 8]  141 	ld	a, (de)
+      00006D 13               [ 8]  142 	inc	de
+      00006E 96               [ 8]  143 	sub	a, (hl)
+      00006F 23               [ 8]  144 	inc	hl
+      000070 1A               [ 8]  145 	ld	a, (de)
+      000071 9E               [ 8]  146 	sbc	a, (hl)
+      000072 1A               [ 8]  147 	ld	a, (de)
+      000073 57               [ 4]  148 	ld	d, a
+      000074 CB 7E            [12]  149 	bit	7, (hl)
+      000076 28 07            [12]  150 	jr	Z, 00141$
+      000078 CB 7A            [ 8]  151 	bit	7, d
+      00007A 20 08            [12]  152 	jr	NZ, 00142$
+      00007C BF               [ 4]  153 	cp	a, a
+      00007D 18 05            [12]  154 	jr	00142$
+      00007F                        155 00141$:
+      00007F CB 7A            [ 8]  156 	bit	7, d
+      000081 28 01            [12]  157 	jr	Z, 00142$
+      000083 37               [ 4]  158 	scf
+      000084                        159 00142$:
+      000084 30 2C            [12]  160 	jr	NC, 00101$
+                                    161 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:26: VBK_REG=1; set_bkg_tile_xy(x,y,0);
+      000086 3E 01            [ 8]  162 	ld	a, #0x01
+      000088 E0r00            [12]  163 	ldh	(_VBK_REG + 0), a
+      00008A AF               [ 4]  164 	xor	a, a
+      00008B F5               [16]  165 	push	af
+      00008C 33               [ 8]  166 	inc	sp
+      00008D 79               [ 4]  167 	ld	a, c
+      00008E F5               [16]  168 	push	af
+      00008F 33               [ 8]  169 	inc	sp
+      000090 F8 12            [12]  170 	ldhl	sp,	#18
+      000092 7E               [ 8]  171 	ld	a, (hl)
+      000093 F5               [16]  172 	push	af
+      000094 33               [ 8]  173 	inc	sp
+      000095 CDr00r00         [24]  174 	call	_set_bkg_tile_xy
+      000098 E8 03            [16]  175 	add	sp, #3
+                                    176 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:27: VBK_REG=0;set_bkg_tile_xy(x++,y,USERINTERFACE_TILES_START+42);
+      00009A AF               [ 4]  177 	xor	a, a
+      00009B E0r00            [12]  178 	ldh	(_VBK_REG + 0), a
+      00009D F8 10            [12]  179 	ldhl	sp,	#16
+      00009F 7E               [ 8]  180 	ld	a, (hl)
+      0000A0 34               [12]  181 	inc	(hl)
+      0000A1 26 3B            [ 8]  182 	ld	h, #0x3b
+                                    183 ;	spillPairReg hl
+                                    184 ;	spillPairReg hl
+      0000A3 E5               [16]  185 	push	hl
+      0000A4 33               [ 8]  186 	inc	sp
+      0000A5 61               [ 4]  187 	ld	h, c
+                                    188 ;	spillPairReg hl
+                                    189 ;	spillPairReg hl
+      0000A6 E5               [16]  190 	push	hl
+      0000A7 33               [ 8]  191 	inc	sp
+      0000A8 F5               [16]  192 	push	af
+      0000A9 33               [ 8]  193 	inc	sp
+      0000AA CDr00r00         [24]  194 	call	_set_bkg_tile_xy
+      0000AD E8 03            [16]  195 	add	sp, #3
+                                    196 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:25: for(uint8_t i=0;i<digits-len;i++){
+      0000AF 04               [ 4]  197 	inc	b
+      0000B0 18 8D            [12]  198 	jr	00104$
+      0000B2                        199 00101$:
+                                    200 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:32: for(uint8_t i=0;i<len;i++){
+      0000B2 F8 10            [12]  201 	ldhl	sp,	#16
+      0000B4 46               [ 8]  202 	ld	b, (hl)
+      0000B5 1E 00            [ 8]  203 	ld	e, #0x00
+      0000B7                        204 00107$:
+      0000B7 7B               [ 4]  205 	ld	a, e
+      0000B8 F8 09            [12]  206 	ldhl	sp,	#9
+      0000BA 96               [ 8]  207 	sub	a, (hl)
+      0000BB 30 35            [12]  208 	jr	NC, 00109$
+                                    209 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:34: VBK_REG=1;set_bkg_tile_xy(x,y,0);
+      0000BD 3E 01            [ 8]  210 	ld	a, #0x01
+      0000BF E0r00            [12]  211 	ldh	(_VBK_REG + 0), a
+      0000C1 D5               [16]  212 	push	de
+      0000C2 AF               [ 4]  213 	xor	a, a
+      0000C3 F5               [16]  214 	push	af
+      0000C4 33               [ 8]  215 	inc	sp
+      0000C5 79               [ 4]  216 	ld	a, c
+      0000C6 F5               [16]  217 	push	af
+      0000C7 33               [ 8]  218 	inc	sp
+      0000C8 C5               [16]  219 	push	bc
+      0000C9 33               [ 8]  220 	inc	sp
+      0000CA CDr00r00         [24]  221 	call	_set_bkg_tile_xy
+      0000CD E8 03            [16]  222 	add	sp, #3
+      0000CF D1               [12]  223 	pop	de
+                                    224 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:35: VBK_REG=0;set_bkg_tile_xy(x++,y,(buffer[i]-'0')+USERINTERFACE_TILES_START+42);
+      0000D0 AF               [ 4]  225 	xor	a, a
+      0000D1 E0r00            [12]  226 	ldh	(_VBK_REG + 0), a
+      0000D3 D5               [16]  227 	push	de
+      0000D4 16 00            [ 8]  228 	ld	d, #0x00
+      0000D6 21 02 00         [12]  229 	ld	hl, #2
+      0000D9 39               [ 8]  230 	add	hl, sp
+      0000DA 19               [ 8]  231 	add	hl, de
+      0000DB D1               [12]  232 	pop	de
+      0000DC 7E               [ 8]  233 	ld	a, (hl)
+      0000DD C6 0B            [ 8]  234 	add	a, #0x0b
+      0000DF 50               [ 4]  235 	ld	d, b
+      0000E0 04               [ 4]  236 	inc	b
+      0000E1 D5               [16]  237 	push	de
+      0000E2 F5               [16]  238 	push	af
+      0000E3 33               [ 8]  239 	inc	sp
+      0000E4 79               [ 4]  240 	ld	a, c
+      0000E5 F5               [16]  241 	push	af
+      0000E6 33               [ 8]  242 	inc	sp
+      0000E7 D5               [16]  243 	push	de
+      0000E8 33               [ 8]  244 	inc	sp
+      0000E9 CDr00r00         [24]  245 	call	_set_bkg_tile_xy
+      0000EC E8 03            [16]  246 	add	sp, #3
+      0000EE D1               [12]  247 	pop	de
+                                    248 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:32: for(uint8_t i=0;i<len;i++){
+      0000EF 1C               [ 4]  249 	inc	e
+      0000F0 18 C5            [12]  250 	jr	00107$
+      0000F2                        251 00109$:
+                                    252 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:37: }
+      0000F2 E8 11            [16]  253 	add	sp, #17
+      0000F4 E1               [12]  254 	pop	hl
+      0000F5 E8 03            [16]  255 	add	sp, #3
+      0000F7 E9               [ 4]  256 	jp	(hl)
+                                    257 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:39: void CollidePaddleAgainstBall(){
+                                    258 ;	---------------------------------
+                                    259 ; Function CollidePaddleAgainstBall
+                                    260 ; ---------------------------------
+      0000F8                        261 _CollidePaddleAgainstBall::
+      0000F8 E8 F8            [16]  262 	add	sp, #-8
+                                    263 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:40: int16_t xd = (int16_t)(ballX>>4)-(int16_t)(paddleX>>4);
+      0000FA 21r00r00         [12]  264 	ld	hl, #_ballX
+      0000FD 2A               [ 8]  265 	ld	a, (hl+)
+      0000FE 4F               [ 4]  266 	ld	c, a
+      0000FF 46               [ 8]  267 	ld	b, (hl)
+      000100 CB 38            [ 8]  268 	srl	b
+      000102 CB 19            [ 8]  269 	rr	c
+      000104 CB 38            [ 8]  270 	srl	b
+      000106 CB 19            [ 8]  271 	rr	c
+      000108 CB 38            [ 8]  272 	srl	b
+      00010A CB 19            [ 8]  273 	rr	c
+      00010C CB 38            [ 8]  274 	srl	b
+      00010E CB 19            [ 8]  275 	rr	c
+      000110 21r00r00         [12]  276 	ld	hl, #_paddleX
+      000113 2A               [ 8]  277 	ld	a, (hl+)
+      000114 5F               [ 4]  278 	ld	e, a
+      000115 56               [ 8]  279 	ld	d, (hl)
+      000116 CB 3A            [ 8]  280 	srl	d
+      000118 CB 1B            [ 8]  281 	rr	e
+      00011A CB 3A            [ 8]  282 	srl	d
+      00011C CB 1B            [ 8]  283 	rr	e
+      00011E CB 3A            [ 8]  284 	srl	d
+      000120 CB 1B            [ 8]  285 	rr	e
+      000122 CB 3A            [ 8]  286 	srl	d
+      000124 CB 1B            [ 8]  287 	rr	e
+      000126 79               [ 4]  288 	ld	a, c
+      000127 93               [ 4]  289 	sub	a, e
+      000128 4F               [ 4]  290 	ld	c, a
+      000129 78               [ 4]  291 	ld	a, b
+      00012A 9A               [ 4]  292 	sbc	a, d
+      00012B 47               [ 4]  293 	ld	b, a
+                                    294 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:42: xd = ABS(xd);
+                                    295 ;	spillPairReg hl
+                                    296 ;	spillPairReg hl
+      00012C 60               [ 4]  297 	ld	h, b
+                                    298 ;	spillPairReg hl
+                                    299 ;	spillPairReg hl
+      00012D CB 7C            [ 8]  300 	bit	7, h
+      00012F 28 06            [12]  301 	jr	Z, 00112$
+      000131 AF               [ 4]  302 	xor	a, a
+      000132 91               [ 4]  303 	sub	a, c
+      000133 4F               [ 4]  304 	ld	c, a
+      000134 9F               [ 4]  305 	sbc	a, a
+      000135 90               [ 4]  306 	sub	a, b
+      000136 47               [ 4]  307 	ld	b, a
+      000137                        308 00112$:
+                                    309 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:44: if(xd<=PADDLE_SIZE/2+BALL_RADIUS){
+      000137 58               [ 4]  310 	ld	e, b
+      000138 16 00            [ 8]  311 	ld	d, #0x00
+      00013A 3E 13            [ 8]  312 	ld	a, #0x13
+      00013C B9               [ 4]  313 	cp	a, c
+      00013D 3E 00            [ 8]  314 	ld	a, #0x00
+      00013F 98               [ 4]  315 	sbc	a, b
+      000140 CB 7B            [ 8]  316 	bit	7, e
+      000142 28 07            [12]  317 	jr	Z, 00203$
+      000144 CB 7A            [ 8]  318 	bit	7, d
+      000146 20 08            [12]  319 	jr	NZ, 00204$
+      000148 BF               [ 4]  320 	cp	a, a
+      000149 18 05            [12]  321 	jr	00204$
+      00014B                        322 00203$:
+      00014B CB 7A            [ 8]  323 	bit	7, d
+      00014D 28 01            [12]  324 	jr	Z, 00204$
+      00014F 37               [ 4]  325 	scf
+      000150                        326 00204$:
+      000150 DAr0Cr03         [16]  327 	jp	C, 00110$
+                                    328 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:46: int16_t yd =(int16_t)(ballY>>4)-(int16_t)(paddleY>>4);
+      000153 21r00r00         [12]  329 	ld	hl, #_ballY
+      000156 2A               [ 8]  330 	ld	a, (hl+)
+      000157 5F               [ 4]  331 	ld	e, a
+      000158 56               [ 8]  332 	ld	d, (hl)
+      000159 CB 3A            [ 8]  333 	srl	d
+      00015B CB 1B            [ 8]  334 	rr	e
+      00015D CB 3A            [ 8]  335 	srl	d
+      00015F CB 1B            [ 8]  336 	rr	e
+      000161 CB 3A            [ 8]  337 	srl	d
+      000163 CB 1B            [ 8]  338 	rr	e
+      000165 CB 3A            [ 8]  339 	srl	d
+      000167 CB 1B            [ 8]  340 	rr	e
+      000169 F8 02            [12]  341 	ldhl	sp,	#2
+      00016B 7B               [ 4]  342 	ld	a, e
+      00016C 22               [ 8]  343 	ld	(hl+), a
+      00016D 72               [ 8]  344 	ld	(hl), d
+      00016E 21r00r00         [12]  345 	ld	hl, #_paddleY
+      000171 2A               [ 8]  346 	ld	a, (hl+)
+      000172 5F               [ 4]  347 	ld	e, a
+      000173 56               [ 8]  348 	ld	d, (hl)
+      000174 CB 3A            [ 8]  349 	srl	d
+      000176 CB 1B            [ 8]  350 	rr	e
+      000178 CB 3A            [ 8]  351 	srl	d
+      00017A CB 1B            [ 8]  352 	rr	e
+      00017C CB 3A            [ 8]  353 	srl	d
+      00017E CB 1B            [ 8]  354 	rr	e
+      000180 CB 3A            [ 8]  355 	srl	d
+      000182 CB 1B            [ 8]  356 	rr	e
+      000184 F8 04            [12]  357 	ldhl	sp,	#4
+      000186 7B               [ 4]  358 	ld	a, e
+      000187 22               [ 8]  359 	ld	(hl+), a
+      000188 7A               [ 4]  360 	ld	a, d
+      000189 32               [ 8]  361 	ld	(hl-), a
+      00018A 2B               [ 8]  362 	dec	hl
+      00018B 2B               [ 8]  363 	dec	hl
+      00018C 2A               [ 8]  364 	ld	a, (hl+)
+      00018D 5F               [ 4]  365 	ld	e, a
+      00018E 2A               [ 8]  366 	ld	a, (hl+)
+      00018F 57               [ 4]  367 	ld	d, a
+      000190 2A               [ 8]  368 	ld	a,	(hl+)
+      000191 66               [ 8]  369 	ld	h, (hl)
+      000192 6F               [ 4]  370 	ld	l, a
+      000193 7B               [ 4]  371 	ld	a, e
+      000194 95               [ 4]  372 	sub	a, l
+      000195 5F               [ 4]  373 	ld	e, a
+      000196 7A               [ 4]  374 	ld	a, d
+      000197 9C               [ 4]  375 	sbc	a, h
+      000198 F8 07            [12]  376 	ldhl	sp,	#7
+      00019A 32               [ 8]  377 	ld	(hl-), a
+      00019B 73               [ 8]  378 	ld	(hl), e
+                                    379 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:48: yd = ABS(yd);
+      00019C 3A               [ 8]  380 	ld	a, (hl-)
+      00019D 2B               [ 8]  381 	dec	hl
+      00019E 77               [ 8]  382 	ld	(hl), a
+      00019F F8 07            [12]  383 	ldhl	sp,	#7
+      0001A1 3A               [ 8]  384 	ld	a, (hl-)
+      0001A2 2B               [ 8]  385 	dec	hl
+      0001A3 77               [ 8]  386 	ld	(hl), a
+      0001A4 CB 7E            [12]  387 	bit	7, (hl)
+      0001A6 28 12            [12]  388 	jr	Z, 00114$
+      0001A8 23               [ 8]  389 	inc	hl
+      0001A9 11 00 00         [12]  390 	ld	de, #0x0000
+      0001AC 2A               [ 8]  391 	ld	a,	(hl+)
+      0001AD 66               [ 8]  392 	ld	h, (hl)
+      0001AE 6F               [ 4]  393 	ld	l, a
+      0001AF 7B               [ 4]  394 	ld	a, e
+      0001B0 95               [ 4]  395 	sub	a, l
+      0001B1 5F               [ 4]  396 	ld	e, a
+      0001B2 7A               [ 4]  397 	ld	a, d
+      0001B3 9C               [ 4]  398 	sbc	a, h
+      0001B4 F8 05            [12]  399 	ldhl	sp,	#5
+      0001B6 32               [ 8]  400 	ld	(hl-), a
+      0001B7 73               [ 8]  401 	ld	(hl), e
+      0001B8 18 0A            [12]  402 	jr	00115$
+      0001BA                        403 00114$:
+      0001BA F8 06            [12]  404 	ldhl	sp,	#6
+      0001BC 3A               [ 8]  405 	ld	a, (hl-)
+      0001BD 2B               [ 8]  406 	dec	hl
+      0001BE 77               [ 8]  407 	ld	(hl), a
+      0001BF F8 07            [12]  408 	ldhl	sp,	#7
+      0001C1 3A               [ 8]  409 	ld	a, (hl-)
+      0001C2 2B               [ 8]  410 	dec	hl
+      0001C3 77               [ 8]  411 	ld	(hl), a
+      0001C4                        412 00115$:
+      0001C4 F8 04            [12]  413 	ldhl	sp,	#4
+      0001C6 2A               [ 8]  414 	ld	a, (hl+)
+      0001C7 23               [ 8]  415 	inc	hl
+      0001C8 32               [ 8]  416 	ld	(hl-), a
+      0001C9 2A               [ 8]  417 	ld	a, (hl+)
+      0001CA 23               [ 8]  418 	inc	hl
+                                    419 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:50: if(yd<=(PADDLE_HALF_THICKNESS+BALL_RADIUS)){
+      0001CB 32               [ 8]  420 	ld	(hl-), a
+      0001CC 3E 05            [ 8]  421 	ld	a, #0x05
+      0001CE 96               [ 8]  422 	sub	a, (hl)
+      0001CF 23               [ 8]  423 	inc	hl
+      0001D0 3E 00            [ 8]  424 	ld	a, #0x00
+      0001D2 9E               [ 8]  425 	sbc	a, (hl)
+      0001D3 3E 00            [ 8]  426 	ld	a, #0x00
+      0001D5 57               [ 4]  427 	ld	d, a
+      0001D6 CB 7E            [12]  428 	bit	7, (hl)
+      0001D8 28 07            [12]  429 	jr	Z, 00205$
+      0001DA CB 7A            [ 8]  430 	bit	7, d
+      0001DC 20 08            [12]  431 	jr	NZ, 00206$
+      0001DE BF               [ 4]  432 	cp	a, a
+      0001DF 18 05            [12]  433 	jr	00206$
+      0001E1                        434 00205$:
+      0001E1 CB 7A            [ 8]  435 	bit	7, d
+      0001E3 28 01            [12]  436 	jr	Z, 00206$
+      0001E5 37               [ 4]  437 	scf
+      0001E6                        438 00206$:
+      0001E6 DAr0Cr03         [16]  439 	jp	C, 00110$
+                                    440 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:53: ballVelocityY=-ballVelocityY;
+      0001E9 AF               [ 4]  441 	xor	a, a
+      0001EA 21r00r00         [12]  442 	ld	hl, #_ballVelocityY
+      0001ED 96               [ 8]  443 	sub	a, (hl)
+      0001EE 22               [ 8]  444 	ld	(hl+), a
+      0001EF 9F               [ 4]  445 	sbc	a, a
+      0001F0 96               [ 8]  446 	sub	a, (hl)
+      0001F1 77               [ 8]  447 	ld	(hl), a
+                                    448 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:55: NR10_REG=0X2B;
+      0001F2 3E 2B            [ 8]  449 	ld	a, #0x2b
+      0001F4 E0r00            [12]  450 	ldh	(_NR10_REG + 0), a
+                                    451 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:56: NR11_REG=0X81;
+      0001F6 3E 81            [ 8]  452 	ld	a, #0x81
+      0001F8 E0r00            [12]  453 	ldh	(_NR11_REG + 0), a
+                                    454 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:57: NR12_REG=0X41;
+      0001FA 3E 41            [ 8]  455 	ld	a, #0x41
+      0001FC E0r00            [12]  456 	ldh	(_NR12_REG + 0), a
+                                    457 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:58: NR13_REG=0X5C;
+      0001FE 3E 5C            [ 8]  458 	ld	a, #0x5c
+      000200 E0r00            [12]  459 	ldh	(_NR13_REG + 0), a
+                                    460 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:59: NR14_REG=0X86;
+      000202 3E 86            [ 8]  461 	ld	a, #0x86
+      000204 E0r00            [12]  462 	ldh	(_NR14_REG + 0), a
+                                    463 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:61: if(xd>PADDLE_SIZE/2-PADDLE_HALF_THICKNESS){
+      000206 58               [ 4]  464 	ld	e, b
+      000207 16 00            [ 8]  465 	ld	d, #0x00
+      000209 3E 0E            [ 8]  466 	ld	a, #0x0e
+      00020B B9               [ 4]  467 	cp	a, c
+      00020C 3E 00            [ 8]  468 	ld	a, #0x00
+      00020E 98               [ 4]  469 	sbc	a, b
+      00020F CB 7B            [ 8]  470 	bit	7, e
+      000211 28 07            [12]  471 	jr	Z, 00207$
+      000213 CB 7A            [ 8]  472 	bit	7, d
+      000215 20 08            [12]  473 	jr	NZ, 00208$
+      000217 BF               [ 4]  474 	cp	a, a
+      000218 18 05            [12]  475 	jr	00208$
+      00021A                        476 00207$:
+      00021A CB 7A            [ 8]  477 	bit	7, d
+      00021C 28 01            [12]  478 	jr	Z, 00208$
+      00021E 37               [ 4]  479 	scf
+      00021F                        480 00208$:
+      00021F D2rECr02         [16]  481 	jp	NC, 00105$
+                                    482 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:64: ballVelocityX=ABS(ballVelocityX);
+      000222 21r00r00         [12]  483 	ld	hl, #_ballVelocityX
+      000225 2A               [ 8]  484 	ld	a, (hl+)
+      000226 46               [ 8]  485 	ld	b, (hl)
+      000227 11 00 00         [12]  486 	ld	de, #0x0000
+      00022A 3A               [ 8]  487 	ld	a, (hl-)
+      00022B 6E               [ 8]  488 	ld	l, (hl)
+      00022C 67               [ 4]  489 	ld	h, a
+      00022D 7B               [ 4]  490 	ld	a, e
+      00022E 95               [ 4]  491 	sub	a, l
+      00022F 5F               [ 4]  492 	ld	e, a
+      000230 7A               [ 4]  493 	ld	a, d
+      000231 9C               [ 4]  494 	sbc	a, h
+      000232 F8 01            [12]  495 	ldhl	sp,	#1
+      000234 32               [ 8]  496 	ld	(hl-), a
+      000235 73               [ 8]  497 	ld	(hl), e
+      000236 FAr00r00         [16]  498 	ld	a, (#_ballVelocityX)
+      000239 F8 06            [12]  499 	ldhl	sp,	#6
+      00023B 77               [ 8]  500 	ld	(hl), a
+      00023C FAr01r00         [16]  501 	ld	a, (#_ballVelocityX + 1)
+      00023F F8 07            [12]  502 	ldhl	sp,	#7
+      000241 77               [ 8]  503 	ld	(hl), a
+                                    504 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:65: ballX=MAX(ballX,paddleX+1+PADDLE_SIZE/2+((PADDLE_HALF_THICKNESS-BALL_RADIUS)<<4));
+      000242 FAr00r00         [16]  505 	ld	a, (#_paddleX)
+      000245 F8 02            [12]  506 	ldhl	sp,	#2
+      000247 77               [ 8]  507 	ld	(hl), a
+      000248 FAr01r00         [16]  508 	ld	a, (#_paddleX + 1)
+      00024B F8 03            [12]  509 	ldhl	sp,	#3
+      00024D 77               [ 8]  510 	ld	(hl), a
+      00024E FAr00r00         [16]  511 	ld	a, (#_ballX)
+      000251 F8 04            [12]  512 	ldhl	sp,	#4
+      000253 77               [ 8]  513 	ld	(hl), a
+      000254 FAr01r00         [16]  514 	ld	a, (#_ballX + 1)
+      000257 F8 05            [12]  515 	ldhl	sp,	#5
+      000259 77               [ 8]  516 	ld	(hl), a
+                                    517 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:64: ballVelocityX=ABS(ballVelocityX);
+      00025A 78               [ 4]  518 	ld	a, b
+      00025B 07               [ 4]  519 	rlca
+      00025C E6 01            [ 8]  520 	and	a,#0x01
+      00025E 4F               [ 4]  521 	ld	c, a
+                                    522 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:62: if(paddleX<ballX){
+      00025F 11r00r00         [12]  523 	ld	de, #_paddleX
+      000262 21r00r00         [12]  524 	ld	hl, #_ballX
+      000265 1A               [ 8]  525 	ld	a, (de)
+      000266 13               [ 8]  526 	inc	de
+      000267 96               [ 8]  527 	sub	a, (hl)
+      000268 23               [ 8]  528 	inc	hl
+      000269 1A               [ 8]  529 	ld	a, (de)
+      00026A 9E               [ 8]  530 	sbc	a, (hl)
+      00026B 30 52            [12]  531 	jr	NC, 00102$
+                                    532 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:64: ballVelocityX=ABS(ballVelocityX);
+      00026D 79               [ 4]  533 	ld	a, c
+      00026E B7               [ 4]  534 	or	a, a
+      00026F 28 0C            [12]  535 	jr	Z, 00116$
+      000271 F8 00            [12]  536 	ldhl	sp,	#0
+      000273 7E               [ 8]  537 	ld	a, (hl)
+      000274 F8 06            [12]  538 	ldhl	sp,	#6
+      000276 77               [ 8]  539 	ld	(hl), a
+      000277 F8 01            [12]  540 	ldhl	sp,	#1
+      000279 7E               [ 8]  541 	ld	a, (hl)
+      00027A F8 07            [12]  542 	ldhl	sp,	#7
+      00027C 77               [ 8]  543 	ld	(hl), a
+      00027D                        544 00116$:
+      00027D F8 06            [12]  545 	ldhl	sp,	#6
+      00027F 7E               [ 8]  546 	ld	a, (hl)
+      000280 EAr00r00         [16]  547 	ld	(#_ballVelocityX),a
+      000283 F8 07            [12]  548 	ldhl	sp,	#7
+      000285 7E               [ 8]  549 	ld	a, (hl)
+      000286 EAr01r00         [16]  550 	ld	(#_ballVelocityX + 1),a
+                                    551 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:65: ballX=MAX(ballX,paddleX+1+PADDLE_SIZE/2+((PADDLE_HALF_THICKNESS-BALL_RADIUS)<<4));
+      000289 F8 02            [12]  552 	ldhl	sp,#2
+      00028B 2A               [ 8]  553 	ld	a, (hl+)
+      00028C 5F               [ 4]  554 	ld	e, a
+      00028D 56               [ 8]  555 	ld	d, (hl)
+      00028E 6B               [ 4]  556 	ld	l, e
+      00028F 62               [ 4]  557 	ld	h, d
+      000290 23               [ 8]  558 	inc	hl
+      000291 E5               [16]  559 	push	hl
+      000292 7D               [ 4]  560 	ld	a, l
+      000293 F8 08            [12]  561 	ldhl	sp,	#8
+      000295 77               [ 8]  562 	ld	(hl), a
+      000296 E1               [12]  563 	pop	hl
+      000297 7C               [ 4]  564 	ld	a, h
+      000298 F8 07            [12]  565 	ldhl	sp,	#7
+      00029A 77               [ 8]  566 	ld	(hl), a
+      00029B F8 06            [12]  567 	ldhl	sp,	#6
+      00029D 5D               [ 4]  568 	ld	e, l
+      00029E 54               [ 4]  569 	ld	d, h
+      00029F F8 04            [12]  570 	ldhl	sp,	#4
+      0002A1 1A               [ 8]  571 	ld	a, (de)
+      0002A2 13               [ 8]  572 	inc	de
+      0002A3 96               [ 8]  573 	sub	a, (hl)
+      0002A4 23               [ 8]  574 	inc	hl
+      0002A5 1A               [ 8]  575 	ld	a, (de)
+      0002A6 9E               [ 8]  576 	sbc	a, (hl)
+      0002A7 30 08            [12]  577 	jr	NC, 00118$
+      0002A9 F8 04            [12]  578 	ldhl	sp,	#4
+      0002AB 2A               [ 8]  579 	ld	a, (hl+)
+      0002AC 23               [ 8]  580 	inc	hl
+      0002AD 32               [ 8]  581 	ld	(hl-), a
+      0002AE 2A               [ 8]  582 	ld	a, (hl+)
+      0002AF 23               [ 8]  583 	inc	hl
+      0002B0 77               [ 8]  584 	ld	(hl), a
+      0002B1                        585 00118$:
+      0002B1 F8 06            [12]  586 	ldhl	sp,	#6
+      0002B3 7E               [ 8]  587 	ld	a, (hl)
+      0002B4 EAr00r00         [16]  588 	ld	(#_ballX),a
+      0002B7 F8 07            [12]  589 	ldhl	sp,	#7
+      0002B9 7E               [ 8]  590 	ld	a, (hl)
+      0002BA EAr01r00         [16]  591 	ld	(#_ballX + 1),a
+      0002BD 18 2D            [12]  592 	jr	00105$
+      0002BF                        593 00102$:
+                                    594 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:68: ballVelocityX=-ABS(ballVelocityX);
+      0002BF 79               [ 4]  595 	ld	a, c
+      0002C0 B7               [ 4]  596 	or	a, a
+      0002C1 28 04            [12]  597 	jr	Z, 00120$
+      0002C3 C1               [12]  598 	pop	bc
+      0002C4 C5               [16]  599 	push	bc
+      0002C5 18 05            [12]  600 	jr	00121$
+      0002C7                        601 00120$:
+      0002C7 F8 06            [12]  602 	ldhl	sp,	#6
+      0002C9 2A               [ 8]  603 	ld	a, (hl+)
+      0002CA 4F               [ 4]  604 	ld	c, a
+      0002CB 46               [ 8]  605 	ld	b, (hl)
+      0002CC                        606 00121$:
+      0002CC AF               [ 4]  607 	xor	a, a
+      0002CD 91               [ 4]  608 	sub	a, c
+      0002CE 21r00r00         [12]  609 	ld	hl, #_ballVelocityX
+      0002D1 22               [ 8]  610 	ld	(hl+), a
+      0002D2 9F               [ 4]  611 	sbc	a, a
+      0002D3 90               [ 4]  612 	sub	a, b
+      0002D4 77               [ 8]  613 	ld	(hl), a
+                                    614 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:69: ballX=MIN(ballX,paddleX-1-PADDLE_SIZE/2-((PADDLE_HALF_THICKNESS-BALL_RADIUS)<<4));
+      0002D5 F8 02            [12]  615 	ldhl	sp,#2
+      0002D7 2A               [ 8]  616 	ld	a, (hl+)
+      0002D8 4F               [ 4]  617 	ld	c, a
+      0002D9 2A               [ 8]  618 	ld	a, (hl+)
+      0002DA 47               [ 4]  619 	ld	b, a
+      0002DB 0B               [ 8]  620 	dec	bc
+      0002DC 2A               [ 8]  621 	ld	a, (hl+)
+      0002DD 91               [ 4]  622 	sub	a, c
+      0002DE 7E               [ 8]  623 	ld	a, (hl)
+      0002DF 98               [ 4]  624 	sbc	a, b
+      0002E0 30 04            [12]  625 	jr	NC, 00122$
+      0002E2 2B               [ 8]  626 	dec	hl
+      0002E3 2A               [ 8]  627 	ld	a, (hl+)
+      0002E4 4F               [ 4]  628 	ld	c, a
+      0002E5 46               [ 8]  629 	ld	b, (hl)
+      0002E6                        630 00122$:
+      0002E6 21r00r00         [12]  631 	ld	hl, #_ballX
+      0002E9 79               [ 4]  632 	ld	a, c
+      0002EA 22               [ 8]  633 	ld	(hl+), a
+      0002EB 70               [ 8]  634 	ld	(hl), b
+      0002EC                        635 00105$:
+                                    636 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:72: ballY=MIN(ballY,paddleY-((1+PADDLE_HALF_THICKNESS+BALL_RADIUS)<<4));
+      0002EC 21r00r00         [12]  637 	ld	hl, #_paddleY
+      0002EF 2A               [ 8]  638 	ld	a, (hl+)
+      0002F0 46               [ 8]  639 	ld	b, (hl)
+      0002F1 C6 A0            [ 8]  640 	add	a, #0xa0
+      0002F3 4F               [ 4]  641 	ld	c, a
+      0002F4 78               [ 4]  642 	ld	a, b
+      0002F5 CE FF            [ 8]  643 	adc	a, #0xff
+      0002F7 47               [ 4]  644 	ld	b, a
+      0002F8 21r00r00         [12]  645 	ld	hl, #_ballY
+      0002FB 2A               [ 8]  646 	ld	a, (hl+)
+      0002FC 5F               [ 4]  647 	ld	e, a
+      0002FD 56               [ 8]  648 	ld	d, (hl)
+      0002FE 7B               [ 4]  649 	ld	a, e
+      0002FF 91               [ 4]  650 	sub	a, c
+      000300 7A               [ 4]  651 	ld	a, d
+      000301 98               [ 4]  652 	sbc	a, b
+      000302 30 02            [12]  653 	jr	NC, 00124$
+      000304 4B               [ 4]  654 	ld	c, e
+      000305 42               [ 4]  655 	ld	b, d
+      000306                        656 00124$:
+      000306 21r00r00         [12]  657 	ld	hl, #_ballY
+      000309 79               [ 4]  658 	ld	a, c
+      00030A 22               [ 8]  659 	ld	(hl+), a
+      00030B 70               [ 8]  660 	ld	(hl), b
+      00030C                        661 00110$:
+                                    662 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:78: }
+      00030C E8 08            [16]  663 	add	sp, #8
+      00030E C9               [16]  664 	ret
+                                    665 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:80: void CollideBricksAgainstBall(){
+                                    666 ;	---------------------------------
+                                    667 ; Function CollideBricksAgainstBall
+                                    668 ; ---------------------------------
+      00030F                        669 _CollideBricksAgainstBall::
+      00030F E8 F5            [16]  670 	add	sp, #-11
+                                    671 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:82: int16_t verticalSide=SIGN(ballVelocityY);
+      000311 21r00r00         [12]  672 	ld	hl, #_ballVelocityY
+      000314 2A               [ 8]  673 	ld	a, (hl+)
+      000315 CB 7E            [12]  674 	bit	7, (hl)
+      000317 28 05            [12]  675 	jr	Z, 00113$
+      000319 01 FF FF         [12]  676 	ld	bc, #0xffff
+      00031C 18 03            [12]  677 	jr	00114$
+      00031E                        678 00113$:
+      00031E 01 01 00         [12]  679 	ld	bc, #0x0001
+      000321                        680 00114$:
+      000321 F8 09            [12]  681 	ldhl	sp,	#9
+      000323 79               [ 4]  682 	ld	a, c
+      000324 22               [ 8]  683 	ld	(hl+), a
+      000325 70               [ 8]  684 	ld	(hl), b
+                                    685 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:83: int16_t horizontalSide=SIGN(ballVelocityX);
+      000326 21r00r00         [12]  686 	ld	hl, #_ballVelocityX
+      000329 2A               [ 8]  687 	ld	a, (hl+)
+      00032A CB 7E            [12]  688 	bit	7, (hl)
+      00032C 28 05            [12]  689 	jr	Z, 00115$
+      00032E 01 FF FF         [12]  690 	ld	bc, #0xffff
+      000331 18 03            [12]  691 	jr	00116$
+      000333                        692 00115$:
+      000333 01 01 00         [12]  693 	ld	bc, #0x0001
+      000336                        694 00116$:
+      000336 33               [ 8]  695 	inc	sp
+      000337 33               [ 8]  696 	inc	sp
+      000338 C5               [16]  697 	push	bc
+                                    698 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:85: int16_t checkHorizontal = (ballX>>4)+horizontalSide*BALL_RADIUS;
+      000339 FAr00r00         [16]  699 	ld	a, (#_ballX)
+      00033C F8 07            [12]  700 	ldhl	sp,	#7
+      00033E 77               [ 8]  701 	ld	(hl), a
+      00033F FAr01r00         [16]  702 	ld	a, (#_ballX + 1)
+      000342 F8 08            [12]  703 	ldhl	sp,	#8
+      000344 77               [ 8]  704 	ld	(hl), a
+      000345 CB 3E            [16]  705 	srl	(hl)
+      000347 2B               [ 8]  706 	dec	hl
+      000348 CB 1E            [16]  707 	rr	(hl)
+      00034A 23               [ 8]  708 	inc	hl
+      00034B CB 3E            [16]  709 	srl	(hl)
+      00034D 2B               [ 8]  710 	dec	hl
+      00034E CB 1E            [16]  711 	rr	(hl)
+      000350 23               [ 8]  712 	inc	hl
+      000351 CB 3E            [16]  713 	srl	(hl)
+      000353 2B               [ 8]  714 	dec	hl
+      000354 CB 1E            [16]  715 	rr	(hl)
+      000356 23               [ 8]  716 	inc	hl
+      000357 CB 3E            [16]  717 	srl	(hl)
+      000359 2B               [ 8]  718 	dec	hl
+      00035A CB 1E            [16]  719 	rr	(hl)
+      00035C F8 00            [12]  720 	ldhl	sp,	#0
+      00035E 7E               [ 8]  721 	ld	a, (hl)
+      00035F 4F               [ 4]  722 	ld	c, a
+      000360 87               [ 4]  723 	add	a, a
+      000361 81               [ 4]  724 	add	a, c
+      000362 F8 07            [12]  725 	ldhl	sp,	#7
+      000364 4E               [ 8]  726 	ld	c, (hl)
+      000365 81               [ 4]  727 	add	a, c
+      000366 F8 02            [12]  728 	ldhl	sp,	#2
+      000368 77               [ 8]  729 	ld	(hl), a
+                                    730 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:86: int16_t checkVertical = (ballY>>4)+verticalSide*BALL_RADIUS;
+      000369 21r00r00         [12]  731 	ld	hl, #_ballY
+      00036C 2A               [ 8]  732 	ld	a, (hl+)
+      00036D 4F               [ 4]  733 	ld	c, a
+      00036E 46               [ 8]  734 	ld	b, (hl)
+      00036F CB 38            [ 8]  735 	srl	b
+      000371 CB 19            [ 8]  736 	rr	c
+      000373 CB 38            [ 8]  737 	srl	b
+      000375 CB 19            [ 8]  738 	rr	c
+      000377 CB 38            [ 8]  739 	srl	b
+      000379 CB 19            [ 8]  740 	rr	c
+      00037B CB 38            [ 8]  741 	srl	b
+      00037D CB 19            [ 8]  742 	rr	c
+      00037F F8 09            [12]  743 	ldhl	sp,	#9
+      000381 7E               [ 8]  744 	ld	a, (hl)
+      000382 F8 05            [12]  745 	ldhl	sp,	#5
+      000384 77               [ 8]  746 	ld	(hl), a
+      000385 F8 0A            [12]  747 	ldhl	sp,	#10
+      000387 7E               [ 8]  748 	ld	a, (hl)
+      000388 F8 06            [12]  749 	ldhl	sp,	#6
+      00038A 32               [ 8]  750 	ld	(hl-), a
+      00038B 2A               [ 8]  751 	ld	a, (hl+)
+      00038C 5F               [ 4]  752 	ld	e, a
+      00038D 56               [ 8]  753 	ld	d, (hl)
+      00038E 6B               [ 4]  754 	ld	l, e
+      00038F 62               [ 4]  755 	ld	h, d
+      000390 29               [ 8]  756 	add	hl, hl
+      000391 19               [ 8]  757 	add	hl, de
+      000392 E5               [16]  758 	push	hl
+      000393 7D               [ 4]  759 	ld	a, l
+      000394 F8 05            [12]  760 	ldhl	sp,	#5
+      000396 77               [ 8]  761 	ld	(hl), a
+      000397 E1               [12]  762 	pop	hl
+      000398 7C               [ 4]  763 	ld	a, h
+      000399 F8 04            [12]  764 	ldhl	sp,	#4
+      00039B 32               [ 8]  765 	ld	(hl-), a
+      00039C 2A               [ 8]  766 	ld	a, (hl+)
+      00039D 5E               [ 8]  767 	ld	e, (hl)
+      00039E 6F               [ 4]  768 	ld	l, a
+      00039F 63               [ 4]  769 	ld	h, e
+      0003A0 09               [ 8]  770 	add	hl, bc
+      0003A1 7D               [ 4]  771 	ld	a, l
+                                    772 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:88: uint8_t topBottomOrWall = CheckTopOrBottomBrick(ballX>>4,checkVertical);
+      0003A2 F8 05            [12]  773 	ldhl	sp,	#5
+      0003A4 22               [ 8]  774 	ld	(hl+), a
+      0003A5 23               [ 8]  775 	inc	hl
+      0003A6 3A               [ 8]  776 	ld	a, (hl-)
+      0003A7 2B               [ 8]  777 	dec	hl
+      0003A8 5E               [ 8]  778 	ld	e, (hl)
+      0003A9 CDr00r00         [24]  779 	call	_CheckTopOrBottomBrick
+      0003AC F8 06            [12]  780 	ldhl	sp,	#6
+      0003AE 77               [ 8]  781 	ld	(hl), a
+                                    782 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:90: DrawNumber3(17,14,horizontalSide*BALL_RADIUS,2);
+      0003AF C1               [12]  783 	pop	bc
+      0003B0 C5               [16]  784 	push	bc
+      0003B1 69               [ 4]  785 	ld	l, c
+      0003B2 60               [ 4]  786 	ld	h, b
+      0003B3 29               [ 8]  787 	add	hl, hl
+      0003B4 09               [ 8]  788 	add	hl, bc
+      0003B5 3E 02            [ 8]  789 	ld	a, #0x02
+      0003B7 F5               [16]  790 	push	af
+      0003B8 33               [ 8]  791 	inc	sp
+      0003B9 E5               [16]  792 	push	hl
+      0003BA 1E 0E            [ 8]  793 	ld	e, #0x0e
+      0003BC 3E 11            [ 8]  794 	ld	a, #0x11
+      0003BE CDr00r00         [24]  795 	call	_DrawNumber3
+                                    796 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:93: if(topBottomOrWall!=0){
+      0003C1 F8 06            [12]  797 	ldhl	sp,	#6
+      0003C3 7E               [ 8]  798 	ld	a, (hl)
+      0003C4 B7               [ 4]  799 	or	a, a
+      0003C5 CAr91r04         [16]  800 	jp	Z, 00105$
+                                    801 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:96: ballVelocityY+=SIGN(ballVelocityY)*BALL_SPEEDUP;
+      0003C8 21r00r00         [12]  802 	ld	hl, #_ballVelocityY
+      0003CB 2A               [ 8]  803 	ld	a, (hl+)
+      0003CC 4F               [ 4]  804 	ld	c, a
+      0003CD 46               [ 8]  805 	ld	b, (hl)
+      0003CE CB 78            [ 8]  806 	bit	7, b
+      0003D0 28 05            [12]  807 	jr	Z, 00117$
+      0003D2 21 FF FF         [12]  808 	ld	hl, #0xffff
+      0003D5 18 03            [12]  809 	jr	00118$
+      0003D7                        810 00117$:
+      0003D7 21 01 00         [12]  811 	ld	hl, #0x0001
+      0003DA                        812 00118$:
+      0003DA 5D               [ 4]  813 	ld	e, l
+      0003DB 54               [ 4]  814 	ld	d, h
+      0003DC 29               [ 8]  815 	add	hl, hl
+      0003DD 19               [ 8]  816 	add	hl, de
+      0003DE 09               [ 8]  817 	add	hl, bc
+      0003DF 4D               [ 4]  818 	ld	c, l
+      0003E0 44               [ 4]  819 	ld	b, h
+      0003E1 21r00r00         [12]  820 	ld	hl, #_ballVelocityY
+      0003E4 79               [ 4]  821 	ld	a, c
+      0003E5 22               [ 8]  822 	ld	(hl+), a
+      0003E6 70               [ 8]  823 	ld	(hl), b
+                                    824 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:99: if(topBottomOrWall!=WALL){
+      0003E7 F8 06            [12]  825 	ldhl	sp,	#6
+      0003E9 7E               [ 8]  826 	ld	a, (hl)
+      0003EA D6 03            [ 8]  827 	sub	a, #0x03
+      0003EC CAr7Dr04         [16]  828 	jp	Z,00102$
+                                    829 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:102: ballVelocityY=-verticalSide*ABS(ballVelocityY);
+      0003EF 11 00 00         [12]  830 	ld	de, #0x0000
+      0003F2 F8 09            [12]  831 	ldhl	sp,	#9
+      0003F4 2A               [ 8]  832 	ld	a,	(hl+)
+      0003F5 66               [ 8]  833 	ld	h, (hl)
+      0003F6 6F               [ 4]  834 	ld	l, a
+      0003F7 7B               [ 4]  835 	ld	a, e
+      0003F8 95               [ 4]  836 	sub	a, l
+      0003F9 5F               [ 4]  837 	ld	e, a
+      0003FA 7A               [ 4]  838 	ld	a, d
+      0003FB 9C               [ 4]  839 	sbc	a, h
+      0003FC F8 08            [12]  840 	ldhl	sp,	#8
+      0003FE 32               [ 8]  841 	ld	(hl-), a
+      0003FF 73               [ 8]  842 	ld	(hl), e
+      000400 21r00r00         [12]  843 	ld	hl, #_ballVelocityY
+      000403 2A               [ 8]  844 	ld	a, (hl+)
+      000404 CB 7E            [12]  845 	bit	7, (hl)
+      000406 28 11            [12]  846 	jr	Z, 00119$
+      000408 11 00 00         [12]  847 	ld	de, #0x0000
+      00040B 3A               [ 8]  848 	ld	a, (hl-)
+      00040C 6E               [ 8]  849 	ld	l, (hl)
+      00040D 67               [ 4]  850 	ld	h, a
+      00040E 7B               [ 4]  851 	ld	a, e
+      00040F 95               [ 4]  852 	sub	a, l
+      000410 5F               [ 4]  853 	ld	e, a
+      000411 7A               [ 4]  854 	ld	a, d
+      000412 9C               [ 4]  855 	sbc	a, h
+      000413 F8 0A            [12]  856 	ldhl	sp,	#10
+      000415 32               [ 8]  857 	ld	(hl-), a
+      000416 73               [ 8]  858 	ld	(hl), e
+      000417 18 0C            [12]  859 	jr	00120$
+      000419                        860 00119$:
+      000419 FAr00r00         [16]  861 	ld	a, (#_ballVelocityY)
+      00041C F8 09            [12]  862 	ldhl	sp,	#9
+      00041E 77               [ 8]  863 	ld	(hl), a
+      00041F FAr01r00         [16]  864 	ld	a, (#_ballVelocityY + 1)
+      000422 F8 0A            [12]  865 	ldhl	sp,	#10
+      000424 77               [ 8]  866 	ld	(hl), a
+      000425                        867 00120$:
+      000425 F8 09            [12]  868 	ldhl	sp,	#9
+      000427 2A               [ 8]  869 	ld	a, (hl+)
+      000428 4F               [ 4]  870 	ld	c, a
+      000429 46               [ 8]  871 	ld	b, (hl)
+      00042A F8 07            [12]  872 	ldhl	sp,	#7
+      00042C 2A               [ 8]  873 	ld	a, (hl+)
+      00042D 5F               [ 4]  874 	ld	e, a
+      00042E 56               [ 8]  875 	ld	d, (hl)
+      00042F CDr00r00         [24]  876 	call	__mulint
+      000432 21r00r00         [12]  877 	ld	hl, #_ballVelocityY
+      000435 79               [ 4]  878 	ld	a, c
+      000436 22               [ 8]  879 	ld	(hl+), a
+      000437 70               [ 8]  880 	ld	(hl), b
+                                    881 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:103: blocksLeft--;
+      000438 21r00r00         [12]  882 	ld	hl, #_blocksLeft
+      00043B 2A               [ 8]  883 	ld	a, (hl+)
+      00043C 5F               [ 4]  884 	ld	e, a
+      00043D 3A               [ 8]  885 	ld	a, (hl-)
+      00043E 57               [ 4]  886 	ld	d, a
+      00043F 1B               [ 8]  887 	dec	de
+      000440 7B               [ 4]  888 	ld	a, e
+      000441 22               [ 8]  889 	ld	(hl+), a
+      000442 72               [ 8]  890 	ld	(hl), d
+                                    891 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:106: NR10_REG=0X00;
+      000443 AF               [ 4]  892 	xor	a, a
+      000444 E0r00            [12]  893 	ldh	(_NR10_REG + 0), a
+                                    894 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:107: NR11_REG=0X81;
+      000446 3E 81            [ 8]  895 	ld	a, #0x81
+      000448 E0r00            [12]  896 	ldh	(_NR11_REG + 0), a
+                                    897 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:108: NR12_REG=0X43;
+      00044A 3E 43            [ 8]  898 	ld	a, #0x43
+      00044C E0r00            [12]  899 	ldh	(_NR12_REG + 0), a
+                                    900 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:109: NR13_REG=0X73;
+      00044E 3E 73            [ 8]  901 	ld	a, #0x73
+      000450 E0r00            [12]  902 	ldh	(_NR13_REG + 0), a
+                                    903 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:110: NR14_REG=0X86;
+      000452 3E 86            [ 8]  904 	ld	a, #0x86
+      000454 E0r00            [12]  905 	ldh	(_NR14_REG + 0), a
+                                    906 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:112: IncreaseScore(5);
+      000456 11 05 00         [12]  907 	ld	de, #0x0005
+      000459 CDr00r00         [24]  908 	call	_IncreaseScore
+                                    909 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:114: UpdateBrick(topBottomOrWall,ballX>>4,checkVertical);
+      00045C 21r00r00         [12]  910 	ld	hl, #_ballX
+      00045F 2A               [ 8]  911 	ld	a, (hl+)
+      000460 5F               [ 4]  912 	ld	e, a
+      000461 4E               [ 8]  913 	ld	c, (hl)
+      000462 CB 39            [ 8]  914 	srl	c
+      000464 CB 1B            [ 8]  915 	rr	e
+      000466 CB 39            [ 8]  916 	srl	c
+      000468 CB 1B            [ 8]  917 	rr	e
+      00046A CB 39            [ 8]  918 	srl	c
+      00046C CB 1B            [ 8]  919 	rr	e
+      00046E CB 39            [ 8]  920 	srl	c
+      000470 CB 1B            [ 8]  921 	rr	e
+      000472 F8 05            [12]  922 	ldhl	sp,	#5
+      000474 2A               [ 8]  923 	ld	a, (hl+)
+      000475 F5               [16]  924 	push	af
+      000476 33               [ 8]  925 	inc	sp
+      000477 7E               [ 8]  926 	ld	a, (hl)
+      000478 CDr00r00         [24]  927 	call	_UpdateBrick
+      00047B 18 14            [12]  928 	jr	00105$
+      00047D                        929 00102$:
+                                    930 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:118: NR10_REG=0X4A;
+      00047D 3E 4A            [ 8]  931 	ld	a, #0x4a
+      00047F E0r00            [12]  932 	ldh	(_NR10_REG + 0), a
+                                    933 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:119: NR11_REG=0X81;
+      000481 3E 81            [ 8]  934 	ld	a, #0x81
+      000483 E0r00            [12]  935 	ldh	(_NR11_REG + 0), a
+                                    936 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:120: NR12_REG=0X43;
+      000485 3E 43            [ 8]  937 	ld	a, #0x43
+      000487 E0r00            [12]  938 	ldh	(_NR12_REG + 0), a
+                                    939 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:121: NR13_REG=0X56;
+      000489 3E 56            [ 8]  940 	ld	a, #0x56
+      00048B E0r00            [12]  941 	ldh	(_NR13_REG + 0), a
+                                    942 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:122: NR14_REG=0X86;
+      00048D 3E 86            [ 8]  943 	ld	a, #0x86
+      00048F E0r00            [12]  944 	ldh	(_NR14_REG + 0), a
+      000491                        945 00105$:
+                                    946 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:129: topBottomOrWall = CheckTopOrBottomBrick(ballX>>4,ballY>>4);
+      000491 21r00r00         [12]  947 	ld	hl, #_ballY
+      000494 2A               [ 8]  948 	ld	a, (hl+)
+      000495 5F               [ 4]  949 	ld	e, a
+      000496 4E               [ 8]  950 	ld	c, (hl)
+      000497 CB 39            [ 8]  951 	srl	c
+      000499 CB 1B            [ 8]  952 	rr	e
+      00049B CB 39            [ 8]  953 	srl	c
+      00049D CB 1B            [ 8]  954 	rr	e
+      00049F CB 39            [ 8]  955 	srl	c
+      0004A1 CB 1B            [ 8]  956 	rr	e
+      0004A3 CB 39            [ 8]  957 	srl	c
+      0004A5 CB 1B            [ 8]  958 	rr	e
+      0004A7 21r00r00         [12]  959 	ld	hl, #_ballX
+      0004AA 2A               [ 8]  960 	ld	a, (hl+)
+      0004AB 4F               [ 4]  961 	ld	c, a
+      0004AC 46               [ 8]  962 	ld	b, (hl)
+      0004AD CB 38            [ 8]  963 	srl	b
+      0004AF CB 19            [ 8]  964 	rr	c
+      0004B1 CB 38            [ 8]  965 	srl	b
+      0004B3 CB 19            [ 8]  966 	rr	c
+      0004B5 CB 38            [ 8]  967 	srl	b
+      0004B7 CB 19            [ 8]  968 	rr	c
+      0004B9 CB 38            [ 8]  969 	srl	b
+      0004BB CB 19            [ 8]  970 	rr	c
+      0004BD 79               [ 4]  971 	ld	a, c
+      0004BE CDr00r00         [24]  972 	call	_CheckTopOrBottomBrick
+      0004C1 F8 0A            [12]  973 	ldhl	sp,	#10
+      0004C3 77               [ 8]  974 	ld	(hl), a
+                                    975 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:130: DrawNumber3(17,15,verticalSide*BALL_RADIUS,2);
+      0004C4 F8 03            [12]  976 	ldhl	sp,	#3
+      0004C6 2A               [ 8]  977 	ld	a, (hl+)
+      0004C7 4F               [ 4]  978 	ld	c, a
+      0004C8 46               [ 8]  979 	ld	b, (hl)
+      0004C9 3E 02            [ 8]  980 	ld	a, #0x02
+      0004CB F5               [16]  981 	push	af
+      0004CC 33               [ 8]  982 	inc	sp
+      0004CD C5               [16]  983 	push	bc
+      0004CE 1E 0F            [ 8]  984 	ld	e, #0x0f
+      0004D0 3E 11            [ 8]  985 	ld	a, #0x11
+      0004D2 CDr00r00         [24]  986 	call	_DrawNumber3
+                                    987 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:133: if(topBottomOrWall!=0){
+      0004D5 F8 0A            [12]  988 	ldhl	sp,	#10
+      0004D7 7E               [ 8]  989 	ld	a, (hl)
+      0004D8 B7               [ 4]  990 	or	a, a
+      0004D9 CArD1r05         [16]  991 	jp	Z, 00111$
+                                    992 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:136: ballVelocityX=-horizontalSide*ABS(ballVelocityX);
+      0004DC 11 00 00         [12]  993 	ld	de, #0x0000
+      0004DF E1               [12]  994 	pop	hl
+      0004E0 E5               [16]  995 	push	hl
+      0004E1 7B               [ 4]  996 	ld	a, e
+      0004E2 95               [ 4]  997 	sub	a, l
+      0004E3 5F               [ 4]  998 	ld	e, a
+      0004E4 7A               [ 4]  999 	ld	a, d
+      0004E5 9C               [ 4] 1000 	sbc	a, h
+      0004E6 F8 09            [12] 1001 	ldhl	sp,	#9
+      0004E8 32               [ 8] 1002 	ld	(hl-), a
+      0004E9 73               [ 8] 1003 	ld	(hl), e
+      0004EA 21r00r00         [12] 1004 	ld	hl, #_ballVelocityX
+      0004ED 2A               [ 8] 1005 	ld	a, (hl+)
+      0004EE CB 7E            [12] 1006 	bit	7, (hl)
+      0004F0 28 0A            [12] 1007 	jr	Z, 00121$
+      0004F2 2B               [ 8] 1008 	dec	hl
+      0004F3 AF               [ 4] 1009 	xor	a, a
+      0004F4 96               [ 8] 1010 	sub	a, (hl)
+      0004F5 23               [ 8] 1011 	inc	hl
+      0004F6 4F               [ 4] 1012 	ld	c, a
+      0004F7 9F               [ 4] 1013 	sbc	a, a
+      0004F8 96               [ 8] 1014 	sub	a, (hl)
+      0004F9 47               [ 4] 1015 	ld	b, a
+      0004FA 18 06            [12] 1016 	jr	00122$
+      0004FC                       1017 00121$:
+      0004FC 21r00r00         [12] 1018 	ld	hl, #_ballVelocityX
+      0004FF 2A               [ 8] 1019 	ld	a, (hl+)
+      000500 4F               [ 4] 1020 	ld	c, a
+      000501 46               [ 8] 1021 	ld	b, (hl)
+      000502                       1022 00122$:
+      000502 F8 08            [12] 1023 	ldhl	sp,	#8
+      000504 2A               [ 8] 1024 	ld	a, (hl+)
+      000505 5F               [ 4] 1025 	ld	e, a
+      000506 56               [ 8] 1026 	ld	d, (hl)
+      000507 CDr00r00         [24] 1027 	call	__mulint
+      00050A 21r00r00         [12] 1028 	ld	hl, #_ballVelocityX
+      00050D 79               [ 4] 1029 	ld	a, c
+      00050E 22               [ 8] 1030 	ld	(hl+), a
+                                   1031 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:139: ballVelocityX+=SIGN(ballVelocityX)*BALL_SPEEDUP;
+      00050F 78               [ 4] 1032 	ld	a, b
+      000510 32               [ 8] 1033 	ld	(hl-), a
+      000511 7E               [ 8] 1034 	ld	a, (hl)
+      000512 F8 04            [12] 1035 	ldhl	sp,	#4
+      000514 77               [ 8] 1036 	ld	(hl), a
+      000515 FAr01r00         [16] 1037 	ld	a, (#_ballVelocityX + 1)
+      000518 F8 05            [12] 1038 	ldhl	sp,	#5
+      00051A 77               [ 8] 1039 	ld	(hl), a
+      00051B CB 7E            [12] 1040 	bit	7, (hl)
+      00051D 28 09            [12] 1041 	jr	Z, 00123$
+      00051F F8 08            [12] 1042 	ldhl	sp,	#8
+      000521 3E FF            [ 8] 1043 	ld	a, #0xff
+      000523 22               [ 8] 1044 	ld	(hl+), a
+      000524 36 FF            [12] 1045 	ld	(hl), #0xff
+      000526 18 07            [12] 1046 	jr	00124$
+      000528                       1047 00123$:
+      000528 F8 08            [12] 1048 	ldhl	sp,	#8
+      00052A 3E 01            [ 8] 1049 	ld	a, #0x01
+      00052C 22               [ 8] 1050 	ld	(hl+), a
+      00052D AF               [ 4] 1051 	xor	a, a
+      00052E 77               [ 8] 1052 	ld	(hl), a
+      00052F                       1053 00124$:
+      00052F F8 08            [12] 1054 	ldhl	sp,#8
+      000531 2A               [ 8] 1055 	ld	a, (hl+)
+      000532 4F               [ 4] 1056 	ld	c, a
+      000533 46               [ 8] 1057 	ld	b, (hl)
+      000534 69               [ 4] 1058 	ld	l, c
+      000535 60               [ 4] 1059 	ld	h, b
+      000536 29               [ 8] 1060 	add	hl, hl
+      000537 09               [ 8] 1061 	add	hl, bc
+      000538 E5               [16] 1062 	push	hl
+      000539 7D               [ 4] 1063 	ld	a, l
+      00053A F8 08            [12] 1064 	ldhl	sp,	#8
+      00053C 77               [ 8] 1065 	ld	(hl), a
+      00053D E1               [12] 1066 	pop	hl
+      00053E 7C               [ 4] 1067 	ld	a, h
+      00053F F8 07            [12] 1068 	ldhl	sp,	#7
+      000541 32               [ 8] 1069 	ld	(hl-), a
+      000542 2A               [ 8] 1070 	ld	a, (hl+)
+      000543 5F               [ 4] 1071 	ld	e, a
+      000544 56               [ 8] 1072 	ld	d, (hl)
+      000545 F8 04            [12] 1073 	ldhl	sp,	#4
+      000547 2A               [ 8] 1074 	ld	a,	(hl+)
+      000548 66               [ 8] 1075 	ld	h, (hl)
+      000549 6F               [ 4] 1076 	ld	l, a
+      00054A 19               [ 8] 1077 	add	hl, de
+      00054B E5               [16] 1078 	push	hl
+      00054C 7D               [ 4] 1079 	ld	a, l
+      00054D F8 0A            [12] 1080 	ldhl	sp,	#10
+      00054F 77               [ 8] 1081 	ld	(hl), a
+      000550 E1               [12] 1082 	pop	hl
+      000551 7C               [ 4] 1083 	ld	a, h
+      000552 F8 09            [12] 1084 	ldhl	sp,	#9
+      000554 32               [ 8] 1085 	ld	(hl-), a
+      000555 7E               [ 8] 1086 	ld	a, (hl)
+      000556 EAr00r00         [16] 1087 	ld	(#_ballVelocityX),a
+      000559 F8 09            [12] 1088 	ldhl	sp,	#9
+      00055B 7E               [ 8] 1089 	ld	a, (hl)
+      00055C EAr01r00         [16] 1090 	ld	(#_ballVelocityX + 1),a
+                                   1091 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:142: if(topBottomOrWall!=WALL){
+      00055F F8 0A            [12] 1092 	ldhl	sp,	#10
+      000561 7E               [ 8] 1093 	ld	a, (hl)
+      000562 D6 03            [ 8] 1094 	sub	a, #0x03
+      000564 28 57            [12] 1095 	jr	Z, 00107$
+                                   1096 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:145: blocksLeft--;
+      000566 21r00r00         [12] 1097 	ld	hl, #_blocksLeft
+      000569 2A               [ 8] 1098 	ld	a, (hl+)
+      00056A 5F               [ 4] 1099 	ld	e, a
+      00056B 3A               [ 8] 1100 	ld	a, (hl-)
+      00056C 57               [ 4] 1101 	ld	d, a
+      00056D 1B               [ 8] 1102 	dec	de
+      00056E 7B               [ 4] 1103 	ld	a, e
+      00056F 22               [ 8] 1104 	ld	(hl+), a
+      000570 72               [ 8] 1105 	ld	(hl), d
+                                   1106 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:149: NR10_REG=0X00;
+      000571 AF               [ 4] 1107 	xor	a, a
+      000572 E0r00            [12] 1108 	ldh	(_NR10_REG + 0), a
+                                   1109 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:150: NR11_REG=0X81;
+      000574 3E 81            [ 8] 1110 	ld	a, #0x81
+      000576 E0r00            [12] 1111 	ldh	(_NR11_REG + 0), a
+                                   1112 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:151: NR12_REG=0X43;
+      000578 3E 43            [ 8] 1113 	ld	a, #0x43
+      00057A E0r00            [12] 1114 	ldh	(_NR12_REG + 0), a
+                                   1115 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:152: NR13_REG=0X73;
+      00057C 3E 73            [ 8] 1116 	ld	a, #0x73
+      00057E E0r00            [12] 1117 	ldh	(_NR13_REG + 0), a
+                                   1118 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:153: NR14_REG=0X86;
+      000580 3E 86            [ 8] 1119 	ld	a, #0x86
+      000582 E0r00            [12] 1120 	ldh	(_NR14_REG + 0), a
+                                   1121 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:156: IncreaseScore(5);
+      000584 11 05 00         [12] 1122 	ld	de, #0x0005
+      000587 CDr00r00         [24] 1123 	call	_IncreaseScore
+                                   1124 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:159: UpdateBrick(topBottomOrWall,checkHorizontal,ballY>>4);
+      00058A FAr00r00         [16] 1125 	ld	a, (#_ballY)
+      00058D F8 08            [12] 1126 	ldhl	sp,	#8
+      00058F 77               [ 8] 1127 	ld	(hl), a
+      000590 FAr01r00         [16] 1128 	ld	a, (#_ballY + 1)
+      000593 F8 09            [12] 1129 	ldhl	sp,	#9
+      000595 77               [ 8] 1130 	ld	(hl), a
+      000596 CB 3E            [16] 1131 	srl	(hl)
+      000598 2B               [ 8] 1132 	dec	hl
+      000599 CB 1E            [16] 1133 	rr	(hl)
+      00059B 23               [ 8] 1134 	inc	hl
+      00059C CB 3E            [16] 1135 	srl	(hl)
+      00059E 2B               [ 8] 1136 	dec	hl
+      00059F CB 1E            [16] 1137 	rr	(hl)
+      0005A1 23               [ 8] 1138 	inc	hl
+      0005A2 CB 3E            [16] 1139 	srl	(hl)
+      0005A4 2B               [ 8] 1140 	dec	hl
+      0005A5 CB 1E            [16] 1141 	rr	(hl)
+      0005A7 23               [ 8] 1142 	inc	hl
+      0005A8 CB 3E            [16] 1143 	srl	(hl)
+      0005AA 2B               [ 8] 1144 	dec	hl
+      0005AB CB 1E            [16] 1145 	rr	(hl)
+      0005AD 2A               [ 8] 1146 	ld	a, (hl+)
+      0005AE 77               [ 8] 1147 	ld	(hl), a
+      0005AF 7E               [ 8] 1148 	ld	a, (hl)
+      0005B0 F5               [16] 1149 	push	af
+      0005B1 33               [ 8] 1150 	inc	sp
+      0005B2 F8 03            [12] 1151 	ldhl	sp,	#3
+      0005B4 5E               [ 8] 1152 	ld	e, (hl)
+      0005B5 F8 0B            [12] 1153 	ldhl	sp,	#11
+      0005B7 7E               [ 8] 1154 	ld	a, (hl)
+      0005B8 CDr00r00         [24] 1155 	call	_UpdateBrick
+      0005BB 18 14            [12] 1156 	jr	00111$
+      0005BD                       1157 00107$:
+                                   1158 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:164: NR10_REG=0X4A;
+      0005BD 3E 4A            [ 8] 1159 	ld	a, #0x4a
+      0005BF E0r00            [12] 1160 	ldh	(_NR10_REG + 0), a
+                                   1161 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:165: NR11_REG=0X81;
+      0005C1 3E 81            [ 8] 1162 	ld	a, #0x81
+      0005C3 E0r00            [12] 1163 	ldh	(_NR11_REG + 0), a
+                                   1164 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:166: NR12_REG=0X43;
+      0005C5 3E 43            [ 8] 1165 	ld	a, #0x43
+      0005C7 E0r00            [12] 1166 	ldh	(_NR12_REG + 0), a
+                                   1167 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:167: NR13_REG=0X56;
+      0005C9 3E 56            [ 8] 1168 	ld	a, #0x56
+      0005CB E0r00            [12] 1169 	ldh	(_NR13_REG + 0), a
+                                   1170 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:168: NR14_REG=0X86;
+      0005CD 3E 86            [ 8] 1171 	ld	a, #0x86
+      0005CF E0r00            [12] 1172 	ldh	(_NR14_REG + 0), a
+      0005D1                       1173 00111$:
+                                   1174 ;E:\make_202008\GameBoy\GameBoy01\Production\source\default\collisions.c:171: }
+      0005D1 E8 0B            [16] 1175 	add	sp, #11
+      0005D3 C9               [16] 1176 	ret
+                                   1177 	.area _CODE
+                                   1178 	.area _INITIALIZER
+                                   1179 	.area _CABS (ABS)
