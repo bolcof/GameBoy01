@@ -19,7 +19,7 @@ void setupArrowSprite() {
 }
 
 void drawScreen() {
-    printf("\c%s\n", ip_address); // Display the IP address
+    printf("%s\n", ip_address); // Display the IP address
     for (uint8_t i = 0; i < num_ssids; i++) {
         printf("  %s\n", ssids[i]); // Display SSIDs
     }
