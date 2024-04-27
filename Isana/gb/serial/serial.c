@@ -88,6 +88,10 @@ void drawSelectedSSID() {
     clearScreen();
     // SSIDの所在ページを計算して現在のページを更新
     printf("\nSSID: %s\n", ssids[currentSelection]);
+    printf("\nPASSWORD:");
+    uint8_t joypadState = joypad();
+    unsigned char buffer[256];
+    gets(buffer);
 }
 
 
