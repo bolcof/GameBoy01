@@ -55,11 +55,22 @@ void updateArrowPosition() {
 void updateSelection(uint8_t joypadState) {
     uint8_t oldSelection = currentSelection;  // 現在の選択を保存
 
+    // 現在のページの最初と最後のインデックスを計算
+    uint8_t firstIndexOfPage = currentPage * ssidsPerPage;
+    uint8_t lastIndexOfPage = firstIndexOfPage + ssidsPerPage - 1;
+    if (currentPage == (num_ssids / ssidsPerPage)) {  // 最後のページの場合
+        lastIndexOfPage = num_ssids - 1;
+    }
+
     if (joypadState & J_UP) {
-        if (currentSelection > 0) currentSelection--;  // 上ボタンが押されたら選択を一つ上に移動
+        if (currentSelection > firstIndexOfPage) {
+            currentSelection--;  // 上ボタンが押されたら選択を一つ上に移動
+        }
     }
     if (joypadState & J_DOWN) {
-        if (currentSelection < num_ssids - 1) currentSelection++;  // 下ボタンが押されたら選択を一つ下に移動
+        if (currentSelection < lastIndexOfPage) {
+            currentSelection++;  // 下ボタンが押されたら選択を一つ下に移動
+        }
     }
     if (oldSelection != currentSelection) {
         updateArrowPosition();  // 矢印の位置を更新
@@ -67,18 +78,24 @@ void updateSelection(uint8_t joypadState) {
 }
 
 
+// ページ切り替え
 void updatePage(uint8_t joypadState) {
+    uint8_t oldPage = currentPage;
     if (joypadState & J_LEFT) {
         if (currentPage > 0) {
             currentPage--;  // 左ボタンが押されたら前のページに移動
-            drawScreen();  // 画面を再描画
         }
     }
     if (joypadState & J_RIGHT) {
         if (currentPage < (num_ssids / ssidsPerPage)) {
             currentPage++;  // 右ボタンが押されたら次のページに移動
-            drawScreen();  // 画面を再描画
         }
+    }
+    if (oldPage != currentPage) {
+        cls();
+        drawScreen();  // 画面を再描画
+        currentSelection = currentPage * ssidsPerPage;  // 新しいページの最初のSSIDを選択
+        updateArrowPosition();  // 矢印の位置を更新
     }
 }
 
