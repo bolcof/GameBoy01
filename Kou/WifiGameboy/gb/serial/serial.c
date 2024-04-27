@@ -82,7 +82,6 @@ void updatePage(uint8_t joypadState) {
     }
 }
 
-
 // 選択したSSIDを表示する関数
 void selectSSID() {
     printf("\nSSID: %s\n", ssids[currentSelection]);  // 選択されたSSIDを表示
