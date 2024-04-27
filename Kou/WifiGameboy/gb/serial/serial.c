@@ -25,8 +25,15 @@ void setupArrowSprite() {
     move_sprite(0, 8, 48);               // スプライトの初期位置を設定
 }
 
+void hideAllSprites() {
+    for (uint8_t i = 0; i < 40; i++) {  // Game Boyは最大で40個のスプライトを扱えます
+        move_sprite(i, 0, 0);  // スプライトを画面外に移動
+        hide_sprite(i);  // スプライトを非表示にする
+    }
+}
+
 // 画面を描画する関数
-void drawScreen() {
+void drawMainMenu() {
     printf("\n");
     printf("%s\n\n", ip_address);  // IPアドレスを表示
     printf("SSID\n");
@@ -93,22 +100,48 @@ void updatePage(uint8_t joypadState) {
     }
     if (oldPage != currentPage) {
         cls();
-        drawScreen();  // 画面を再描画
+        drawMainMenu();  // 画面を再描画
         currentSelection = currentPage * ssidsPerPage;  // 新しいページの最初のSSIDを選択
         updateArrowPosition();  // 矢印の位置を更新
     }
 }
 
 // 選択したSSIDを表示する関数
-void selectSSID() {
-    printf("\nSSID: %s\n", ssids[currentSelection]);  // 選択されたSSIDを表示
+void drawSelectedSSID() {
+    cls();
+    // SSIDの所在ページを計算して現在のページを更新
+    printf("\nSSID: %s\n", ssids[currentSelection]);
+    printf("\nPASSWORD:");
+    uint8_t joypadState = joypad();
+    unsigned char buffer[256];
+    gets(buffer);
+}
+
+// 現在の画面状態を管理する変数
+enum ScreenState {
+    MAIN_MENU,
+    SELECTEDSSID
+} currentScreen = MAIN_MENU;
+
+// 画面を切り替える関数
+void switchScreen(enum ScreenState newScreen) {
+    hideAllSprites();
+    currentScreen = newScreen;
+    switch (currentScreen) {
+        case MAIN_MENU:
+            drawMainMenu();
+            break;
+        case SELECTEDSSID:
+            drawSelectedSSID();
+            break;
+    }
 }
 
 // メイン関数
 void main(void) {
     DISPLAY_ON;  // ディスプレイをオンにする
     setupArrowSprite();  // 矢印スプライトをセットアップ
-    drawScreen();  // 初期画面を描画
+    drawMainMenu();  // 初期画面を描画
     updateArrowPosition();  // 矢印の位置を更新
 
     while (1) {
@@ -120,7 +153,7 @@ void main(void) {
             updatePage(joypadState);  // ページを更新
         }
         if (joypadState & J_A) {
-            selectSSID();  // SSIDを選択
+            switchScreen(SELECTEDSSID);
         }
         delay(100);  // 100ミリ秒待つ
     }
