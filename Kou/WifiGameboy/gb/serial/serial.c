@@ -5,7 +5,7 @@
 const char *ip_address = "IP:192.168.1.2";  // IPアドレスを文字列として定義
 // SSIDリストを定義
 const char *ssids[] = {
-    "AAAAAA", "BBBBBB", "CCCCCC", "DDDDDD", "EEEEEE", "FFFFFF", "GGGGGG", "HHHHHH", "IIIIII", "JJJJJJ", "KKKKKK", "LLLLLL", "MMMMMM", "NNNNNN", "OOOOOO"
+    "AAAAAA", "BBBBBB", "CCCCCC", "DDDDDD", "EEEEEE", "FFFFFF", "GGGGGG", "HHHHHH", "IIIIII", "JJJJJJ", "KKKKKK", "LLLLLL", "MMMMMM", "NNNNNN"
 };
 const uint8_t num_ssids = sizeof(ssids) / sizeof(ssids[0]);  // SSIDの数を計算
 uint8_t currentSelection = 0;  // 現在選択されているSSIDのインデックス
@@ -53,30 +53,32 @@ void updateArrowPosition() {
 
 // 選択を更新する関数
 void updateSelection(uint8_t joypadState) {
-    uint8_t oldSelection = currentSelection;
+    uint8_t oldSelection = currentSelection;  // 現在の選択を保存
+
     if (joypadState & J_UP) {
         if (currentSelection > 0) currentSelection--;  // 上ボタンが押されたら選択を一つ上に移動
     }
     if (joypadState & J_DOWN) {
         if (currentSelection < num_ssids - 1) currentSelection++;  // 下ボタンが押されたら選択を一つ下に移動
     }
-    // 右ボタンが押されたら次のページへ
-    if (joypadState & J_RIGHT) {
-        if (currentPage < (num_ssids - 1) / ssidsPerPage) {
-            currentPage++;
-            drawScreen();
-        }
-    }
-    // 左ボタンが押されたら前のページへ
-    if (joypadState & J_LEFT) {
-        if (currentPage > 0) {
-            currentPage--;
-            drawScreen();
-        }
-    }
-    // 選択位置が変わった場合は矢印の位置を更新
     if (oldSelection != currentSelection) {
         updateArrowPosition();  // 矢印の位置を更新
+    }
+}
+
+
+void updatePage(uint8_t joypadState) {
+    if (joypadState & J_LEFT) {
+        if (currentPage > 0) {
+            currentPage--;  // 左ボタンが押されたら前のページに移動
+            drawScreen();  // 画面を再描画
+        }
+    }
+    if (joypadState & J_RIGHT) {
+        if (currentPage < (num_ssids / ssidsPerPage)) {
+            currentPage++;  // 右ボタンが押されたら次のページに移動
+            drawScreen();  // 画面を再描画
+        }
     }
 }
 
@@ -98,9 +100,13 @@ void main(void) {
         if (joypadState & (J_UP | J_DOWN)) {
             updateSelection(joypadState);  // 選択を更新
         }
+        if (joypadState & (J_LEFT | J_RIGHT)) {
+            updatePage(joypadState);  // ページを更新
+        }
         if (joypadState & J_A) {
             selectSSID();  // SSIDを選択
         }
         delay(100);  // 100ミリ秒待つ
     }
+
 }
