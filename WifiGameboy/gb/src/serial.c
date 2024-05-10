@@ -2,7 +2,6 @@
 #include <stdint.h>        // 標準整数型の定義を提供するヘッダをインクルード
 #include <stdio.h>         // 標準入出力関数を提供するヘッダをインクルード
 
-const char *ip_address = "IP:192.168.1.2";  // IPアドレスを文字列として定義
 // SSIDリストを定義
 const char *ssids[] = {
     "AAAAAA", "BBBBBB", "CCCCCC", "DDDDDD", "EEEEEE", "FFFFFF", "GGGGGG", "HHHHHH", "IIIIII", "JJJJJJ", "KKKKKK", "LLLLLL", "MMMMMM", "NNNNNN"
@@ -12,17 +11,42 @@ uint8_t currentSelection = 0;  // 現在選択されているSSIDのインデッ
 uint8_t currentPage = 0;  // 現在のページ番号
 const uint8_t ssidsPerPage = 11;  // 1ページあたりのSSID数
 
-// 矢印スプライトのタイルデータ
 unsigned char arrow_tiles[] = {
-    0x24, 0x24, 0x18, 0x18, 0x7E, 0x7E, 0x18, 0x18,
-    0x18, 0x18, 0x3C, 0x3C, 0x7E, 0x7E, 0xFF, 0xFF
+0x18,0x00,0x0c,0x00,
+0x06,0x00,0x03,0x00,
+0x06,0x00,0x0c,0x00,
+0x18,0x00,0x00,0x00
 };
 
-// 矢印スプライトをセットアップする関数
+// リロードアイコンのタイルデータ
+unsigned char reload_arrow_tiles[] = {
+0xda,0x00,0x92,0x00,
+0xda,0x00,0x52,0x00,
+0xdb,0x00,0x00,0x00,
+0x01,0xc5,0x00,0x00,
+
+0x6d,0x00,0x48,0x00,
+0x68,0x00,0x48,0x00,
+0x6c,0x00,0x00,0x01,
+0x41,0x85,0x0e,0x07,
+
+0xe4,0x00,0xb6,0x00,
+0x94,0x00,0xb6,0x00,
+0x80,0x00,0x82,0x73,
+0x41,0x85,0x05,0x06
+};
+
+
+// スプライトをセットアップする関数
 void setupArrowSprite() {
     set_sprite_data(0, 1, arrow_tiles);  // スプライトデータをメモリにロード
     set_sprite_tile(0, 0);               // スプライトタイルを設定
     move_sprite(0, 8, 48);               // スプライトの初期位置を設定
+}
+void setupReloadSprite() {
+    set_sprite_data(1, 1, reload_arrow_tiles);  // スプライトデータをメモリにロード
+    set_sprite_tile(1, 1);                      // スプライトタイルを設定（1番目のスプライトに1番目のタイルを使用）
+    move_sprite(1, 100, 40);                    // スプライトの位置を設定（右上隅近く）
 }
 
 void hideAllSprites() {
@@ -30,26 +54,35 @@ void hideAllSprites() {
         move_sprite(i, 0, 0);  // スプライトを画面外に移動
         hide_sprite(i);  // スプライトを非表示にする
     }
-}
++
 
 // 画面を描画する関数
 void drawMainMenu() {
     printf("\n");
-    printf("%s\n\n", ip_address);  // IPアドレスを表示
-    printf("SSID\n");
+    printf("New Connect\n\n");
+    printf("SSID");
+    for (uint8_t i = 0; i < 9; i++) { // Adjust spaces according to your display width
+        printf(" ");
+    }
+    printf("Reload\n");
+
+    
     for (uint8_t i = 0; i < ssidsPerPage; i++) {
         uint8_t index = i + currentPage * ssidsPerPage;  // 現在のページに応じたSSIDのインデックスを計算
         if (index < num_ssids) {
             printf("  %s\n", ssids[index]);  // SSIDを表示
         }
     }
+
+    // ページ番号を表示
     uint8_t pageStrLen = 5 + (currentPage + 1 >= 10 ? 2 : 1);  // ページ番号表示の文字列長を計算
     uint8_t spaces = (20 - pageStrLen) / 2; // 中央揃えのためのスペース数を計算
     printf("\n");
     for (uint8_t i = 0; i < spaces; i++) {
         printf(" ");
     }
-    printf("< %d >\n", currentPage + 1);  // ページ番号を表示
+    printf("< %d >\n", currentPage + 1);
+
     SHOW_SPRITES;  // スプライトを表示
 }
 
@@ -141,6 +174,7 @@ void switchScreen(enum ScreenState newScreen) {
 void main(void) {
     DISPLAY_ON;  // ディスプレイをオンにする
     setupArrowSprite();  // 矢印スプライトをセットアップ
+    setupReloadSprite();  // リロードスプライトをセットアップ
     drawMainMenu();  // 初期画面を描画
     updateArrowPosition();  // 矢印の位置を更新
 
