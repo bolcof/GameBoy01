@@ -1,4 +1,4 @@
-CC	= ../../gbdk/bin/lcc -Wa-l -Wl-m -Wl-j
+CC	= ../include/gbdk/bin/lcc -Wa-l -Wl-m -Wl-j
 
 BINS	= serial.gb
 

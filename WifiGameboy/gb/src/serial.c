@@ -11,7 +11,6 @@ uint8_t currentSelection = 0;  // 現在選択されているSSIDのインデッ
 uint8_t currentPage = 0;  // 現在のページ番号
 const uint8_t ssidsPerPage = 11;  // 1ページあたりのSSID数
 
-// 矢印スプライトのタイルデータ
 unsigned char arrow_tiles[] = {
 0x18,0x00,0x0c,0x00,
 0x06,0x00,0x03,0x00,
@@ -55,7 +54,7 @@ void hideAllSprites() {
         move_sprite(i, 0, 0);  // スプライトを画面外に移動
         hide_sprite(i);  // スプライトを非表示にする
     }
-}
++
 
 // 画面を描画する関数
 void drawMainMenu() {
