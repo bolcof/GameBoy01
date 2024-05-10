@@ -4,7 +4,7 @@
 #include "graphics/Paddle.h"
 
 
-uint8_t CheckTopOrBottomBrick(uint8_t x, uint8_t  y){
+uint8_t CheckTopOrBottomBrick(uint8_t x, uint8_t y){
 
     if(x<=8) return WALL;
     //Critical Chance
@@ -32,7 +32,6 @@ uint8_t CheckTopOrBottomBrick(uint8_t x, uint8_t  y){
 
     // 
     return 0;
-
 }
 
 

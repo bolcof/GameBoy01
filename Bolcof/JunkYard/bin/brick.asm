@@ -44,7 +44,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:7: uint8_t CheckTopOrBottomBrick(uint8_t x, uint8_t  y){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:7: uint8_t CheckTopOrBottomBrick(uint8_t x, uint8_t  y){
 ;	---------------------------------
 ; Function CheckTopOrBottomBrick
 ; ---------------------------------
@@ -52,7 +52,7 @@ _CheckTopOrBottomBrick::
 	add	sp, #-10
 	ldhl	sp,	#9
 	ld	(hl-), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:9: if(x<=8) return WALL;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:9: if(x<=8) return WALL;
 	ld	a, e
 	ld	(hl+), a
 	ld	a, #0x08
@@ -61,7 +61,7 @@ _CheckTopOrBottomBrick::
 	ld	a, #0x03
 	jp	00115$
 00102$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:12: if(x>=120) return WALL;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:12: if(x>=120) return WALL;
 	ldhl	sp,	#9
 	ld	a, (hl)
 	sub	a, #0x78
@@ -69,7 +69,7 @@ _CheckTopOrBottomBrick::
 	ld	a, #0x03
 	jp	00115$
 00104$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:15: uint8_t brick =get_bkg_tile_xy(x/8,y/8);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:15: uint8_t brick =get_bkg_tile_xy(x/8,y/8);
 	ldhl	sp,	#8
 	ld	a, (hl)
 	ldhl	sp,	#0
@@ -119,14 +119,14 @@ _CheckTopOrBottomBrick::
 	inc	sp
 	call	_get_bkg_tile_xy
 	pop	hl
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:19: if(brick==0) return 0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:19: if(brick==0) return 0;
 	ldhl	sp,#2
 	ld	(hl), e
 	ld	a, (hl)
 	or	a,a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:22: uint8_t mid = (y/8)*8+4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:22: uint8_t mid = (y/8)*8+4;
 	jp	Z,00115$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:24: uint8_t bottomMissing = brick==4||brick==8||brick==0x0C;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:24: uint8_t bottomMissing = brick==4||brick==8||brick==0x0C;
 	ldhl	sp,	#2
 	ld	a, (hl)
 	sub	a, #0x04
@@ -149,7 +149,7 @@ _CheckTopOrBottomBrick::
 	ldhl	sp,	#7
 	ld	a, (hl)
 	ldhl	sp,	#3
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:25: uint8_t topMissing = (brick-1)>=12&&(brick-1)<15; 
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:25: uint8_t topMissing = (brick-1)>=12&&(brick-1)<15; 
 	ld	(hl-), a
 	ld	a, (hl+)
 	inc	hl
@@ -213,7 +213,7 @@ _CheckTopOrBottomBrick::
 00128$:
 	ldhl	sp,	#7
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:28: if((y/4)%2!=0 && !bottomMissing)return BOTTOM;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:28: if((y/4)%2!=0 && !bottomMissing)return BOTTOM;
 	pop	de
 	push	de
 	sra	d
@@ -232,7 +232,7 @@ _CheckTopOrBottomBrick::
 	ld	a, #0x01
 	jr	00115$
 00108$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:29: if((y/4)%2==0  && !topMissing)return TOP;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:29: if((y/4)%2==0  && !topMissing)return TOP;
 	pop	de
 	push	de
 	sra	d
@@ -251,7 +251,7 @@ _CheckTopOrBottomBrick::
 	ld	a, #0x02
 	jr	00115$
 00111$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:31: if(brick>=0x10)return WALL;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:31: if(brick>=0x10)return WALL;
 	ldhl	sp,	#2
 	ld	a, (hl)
 	sub	a, #0x10
@@ -259,13 +259,13 @@ _CheckTopOrBottomBrick::
 	ld	a, #0x03
 	jr	00115$
 00114$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:34: return 0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:34: return 0;
 	xor	a, a
 00115$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:36: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:36: }
 	add	sp, #10
 	ret
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:39: void UpdateBrick(uint8_t side, uint8_t x, uint8_t  y){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:39: void UpdateBrick(uint8_t side, uint8_t x, uint8_t  y){
 ;	---------------------------------
 ; Function UpdateBrick
 ; ---------------------------------
@@ -274,7 +274,7 @@ _UpdateBrick::
 	ldhl	sp,	#9
 	ld	(hl-), a
 	ld	(hl), e
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:41: uint8_t column=x/8;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:41: uint8_t column=x/8;
 	ld	a, (hl-)
 	dec	hl
 	ld	(hl+), a
@@ -293,7 +293,7 @@ _UpdateBrick::
 	ld	a, (hl)
 	ldhl	sp,	#0
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:42: uint8_t row=y/8;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:42: uint8_t row=y/8;
 	ldhl	sp,	#12
 	ld	a, (hl)
 	ldhl	sp,	#6
@@ -317,25 +317,25 @@ _UpdateBrick::
 	rr	(hl)
 	ld	a, (hl)
 	ldhl	sp,	#1
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:45: uint8_t brick =get_bkg_tile_xy(column,row);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:45: uint8_t brick =get_bkg_tile_xy(column,row);
 	ld	(hl-), a
 	ld	d, a
 	ld	e, (hl)
 	push	de
 	call	_get_bkg_tile_xy
 	pop	hl
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:48: if(brick==0) return;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:48: if(brick==0) return;
 	ldhl	sp,#2
 	ld	(hl), e
 	ld	a, (hl)
 	or	a, a
 	jp	Z,00142$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:49: if(brick>=USERINTERFACE_TILES_START)return;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:49: if(brick>=USERINTERFACE_TILES_START)return;
 	ldhl	sp,	#2
 	ld	a, (hl)
 	sub	a, #0x11
 	jp	NC,00142$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:53: side = (y/4)%2==0?TOP:BOTTOM;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:53: side = (y/4)%2==0?TOP:BOTTOM;
 	ldhl	sp,	#6
 	ld	e, (hl)
 	ld	d, #0x00
@@ -363,7 +363,7 @@ _UpdateBrick::
 	ldhl	sp,	#7
 	ld	a, (hl+)
 	inc	hl
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:57: if((brick==4||brick==8||brick==12)&&side==TOP)set_bkg_tile_xy(column,row,0);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:57: if((brick==4||brick==8||brick==12)&&side==TOP)set_bkg_tile_xy(column,row,0);
 	ld	(hl), a
 	sub	a, #0x02
 	ld	a, #0x01
@@ -400,7 +400,7 @@ _UpdateBrick::
 	add	sp, #3
 	jp	00142$
 00137$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:58: else if(brick>=13&&side==BOTTOM)set_bkg_tile_xy(column,row,0);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:58: else if(brick>=13&&side==BOTTOM)set_bkg_tile_xy(column,row,0);
 	ldhl	sp,	#9
 	ld	a, (hl)
 	dec	a
@@ -431,9 +431,9 @@ _UpdateBrick::
 	add	sp, #3
 	jp	00142$
 00133$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:61: uint8_t nextTile=brick;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:61: uint8_t nextTile=brick;
 	ldhl	sp,	#2
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:63: if(brick>=1&&brick<=3)nextTile=4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:63: if(brick>=1&&brick<=3)nextTile=4;
 	ld	a,(hl)
 	ld	e,a
 	sub	a, #0x01
@@ -446,7 +446,7 @@ _UpdateBrick::
 	inc	hl
 	ld	a, #0x00
 	rla
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:64: else if(brick>=5&&brick<=7)nextTile=8;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:64: else if(brick>=5&&brick<=7)nextTile=8;
 	ld	(hl-), a
 	dec	hl
 	ld	a, (hl)
@@ -462,7 +462,7 @@ _UpdateBrick::
 	rla
 	ldhl	sp,	#6
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:65: else if(brick>=9&&brick<=11)nextTile=12;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:65: else if(brick>=9&&brick<=11)nextTile=12;
 	ldhl	sp,	#2
 	ld	a, (hl)
 	sub	a, #0x09
@@ -473,7 +473,7 @@ _UpdateBrick::
 	ld	a, #0x0b
 	ldhl	sp,	#2
 	sub	a, (hl)
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:62: if(side==BOTTOM){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:62: if(side==BOTTOM){
 	inc	hl
 	ld	a, #0x00
 	rla
@@ -481,7 +481,7 @@ _UpdateBrick::
 	ld	a, (hl)
 	or	a, a
 	jr	Z, 00130$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:63: if(brick>=1&&brick<=3)nextTile=4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:63: if(brick>=1&&brick<=3)nextTile=4;
 	bit	0, b
 	jr	NZ, 00113$
 	inc	hl
@@ -490,7 +490,7 @@ _UpdateBrick::
 	ld	e, #0x04
 	jr	00131$
 00113$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:64: else if(brick>=5&&brick<=7)nextTile=8;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:64: else if(brick>=5&&brick<=7)nextTile=8;
 	ldhl	sp,	#5
 	bit	0, (hl)
 	jr	NZ, 00109$
@@ -500,7 +500,7 @@ _UpdateBrick::
 	ld	e, #0x08
 	jr	00131$
 00109$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:65: else if(brick>=9&&brick<=11)nextTile=12;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:65: else if(brick>=9&&brick<=11)nextTile=12;
 	ldhl	sp,	#7
 	bit	0, (hl)
 	jr	NZ, 00131$
@@ -509,11 +509,11 @@ _UpdateBrick::
 	ld	e, #0x0c
 	jr	00131$
 00130$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:67: else if(side==TOP){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:67: else if(side==TOP){
 	ld	a, c
 	or	a, a
 	jr	Z, 00131$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:68: if(brick>=1&&brick<=3)nextTile=13;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:68: if(brick>=1&&brick<=3)nextTile=13;
 	bit	0, b
 	jr	NZ, 00124$
 	ldhl	sp,	#4
@@ -522,7 +522,7 @@ _UpdateBrick::
 	ld	e, #0x0d
 	jr	00131$
 00124$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:69: else if(brick>=5&&brick<=7)nextTile=14;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:69: else if(brick>=5&&brick<=7)nextTile=14;
 	ldhl	sp,	#5
 	bit	0, (hl)
 	jr	NZ, 00120$
@@ -532,7 +532,7 @@ _UpdateBrick::
 	ld	e, #0x0e
 	jr	00131$
 00120$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:70: else if(brick>=9&&brick<=11)nextTile=15;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:70: else if(brick>=9&&brick<=11)nextTile=15;
 	ldhl	sp,	#7
 	bit	0, (hl)
 	jr	NZ, 00131$
@@ -540,7 +540,7 @@ _UpdateBrick::
 	jr	NZ, 00131$
 	ld	e, #0x0f
 00131$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:73: set_bkg_tile_xy(column,row,nextTile);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:73: set_bkg_tile_xy(column,row,nextTile);
 	ld	a, e
 	push	af
 	inc	sp
@@ -553,12 +553,12 @@ _UpdateBrick::
 	call	_set_bkg_tile_xy
 	add	sp, #3
 00142$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:77: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:77: }
 	add	sp, #10
 	pop	hl
 	inc	sp
 	jp	(hl)
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:80: void DrawLevelBricks(uint8_t *level){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:80: void DrawLevelBricks(uint8_t *level){
 ;	---------------------------------
 ; Function DrawLevelBricks
 ; ---------------------------------
@@ -568,12 +568,12 @@ _DrawLevelBricks::
 	ld	a, e
 	ld	(hl+), a
 	ld	(hl), d
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:84: blocksLeft=0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:84: blocksLeft=0;
 	xor	a, a
 	ld	hl, #_blocksLeft
 	ld	(hl+), a
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:86: for(uint8_t i=0;i<AREA_HEIGHT;i++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:86: for(uint8_t i=0;i<AREA_HEIGHT;i++){
 	ldhl	sp,	#8
 	ld	(hl), #0x00
 00110$:
@@ -581,7 +581,7 @@ _DrawLevelBricks::
 	ld	a, (hl)
 	sub	a, #0x11
 	jp	NC, 00112$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:87: for(uint8_t j=0;j<AREA_WIDTH;j++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:87: for(uint8_t j=0;j<AREA_WIDTH;j++){
 	inc	hl
 	ld	(hl), #0x00
 00107$:
@@ -589,7 +589,7 @@ _DrawLevelBricks::
 	ld	a, (hl)
 	sub	a, #0x0e
 	jp	NC, 00111$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:89: uint8_t brick = level[i*AREA_WIDTH+j];
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:89: uint8_t brick = level[i*AREA_WIDTH+j];
 	dec	hl
 	ld	c, (hl)
 	ld	b, #0x00
@@ -646,7 +646,7 @@ _DrawLevelBricks::
 	ld	d, a
 	ld	a, (de)
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:92: set_bkg_tile_xy(j+1,i+1,0);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:92: set_bkg_tile_xy(j+1,i+1,0);
 	ldhl	sp,	#8
 	ld	a, (hl+)
 	ld	c, (hl)
@@ -655,13 +655,13 @@ _DrawLevelBricks::
 	ld	(hl+), a
 	ld	a, c
 	inc	a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:91: if(brick==NO____BRICK){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:91: if(brick==NO____BRICK){
 	ld	(hl-), a
 	dec	hl
 	ld	a, (hl)
 	inc	a
 	jr	NZ, 00102$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:92: set_bkg_tile_xy(j+1,i+1,0);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:92: set_bkg_tile_xy(j+1,i+1,0);
 	xor	a, a
 	push	af
 	inc	sp
@@ -674,7 +674,7 @@ _DrawLevelBricks::
 	add	sp, #3
 	jr	00108$
 00102$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:96: set_bkg_tile_xy(j+1,i+1,brick);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:96: set_bkg_tile_xy(j+1,i+1,brick);
 	ldhl	sp,	#3
 	ld	a, (hl+)
 	ld	d, a
@@ -686,7 +686,7 @@ _DrawLevelBricks::
 	inc	sp
 	call	_set_bkg_tile_xy
 	add	sp, #3
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:99: blocksLeft+= (brick==LGHT__BRICK||brick==MED___BRICK||brick==DRK___BRICK)? 2:1;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:99: blocksLeft+= (brick==LGHT__BRICK||brick==MED___BRICK||brick==DRK___BRICK)? 2:1;
 	ldhl	sp,	#3
 	ld	a, (hl)
 	dec	a
@@ -747,17 +747,17 @@ _DrawLevelBricks::
 	ld	a, (hl)
 	ld	(#_blocksLeft + 1),a
 00108$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:87: for(uint8_t j=0;j<AREA_WIDTH;j++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:87: for(uint8_t j=0;j<AREA_WIDTH;j++){
 	ldhl	sp,	#9
 	inc	(hl)
 	jp	00107$
 00111$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:86: for(uint8_t i=0;i<AREA_HEIGHT;i++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:86: for(uint8_t i=0;i<AREA_HEIGHT;i++){
 	ldhl	sp,	#8
 	inc	(hl)
 	jp	00110$
 00112$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\brick.c:104: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\brick.c:104: }
 	add	sp, #10
 	ret
 	.area _CODE

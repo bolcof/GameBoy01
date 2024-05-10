@@ -86,7 +86,7 @@ _joypadCurrent::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:27: uint8_t RandomNumber(uint8_t min, uint8_t max)
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\common.c:27: uint8_t RandomNumber(uint8_t min, uint8_t max)
 ;	---------------------------------
 ; Function RandomNumber
 ; ---------------------------------
@@ -95,7 +95,7 @@ _RandomNumber::
 ;	spillPairReg hl
 ;	spillPairReg hl
 	ld	a, e
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:31: return min + (DIV_REG % (max - min)); 
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\common.c:31: return min + (DIV_REG % (max - min)); 
 	ld	b, #0x00
 	ld	e, l
 	ld	d, #0x00
@@ -112,7 +112,7 @@ _RandomNumber::
 	pop	hl
 	ld	a, c
 	add	a, l
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:32: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\common.c:32: }
 	ret
 _BlackAndWhitePalette:
 	.dw #0x7fff

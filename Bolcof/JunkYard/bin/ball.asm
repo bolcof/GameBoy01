@@ -45,7 +45,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:12: void DrawNumber2(uint8_t x,uint8_t y, uint16_t number,uint8_t digits){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:12: void DrawNumber2(uint8_t x,uint8_t y, uint16_t number,uint8_t digits){
 ;	---------------------------------
 ; Function DrawNumber2
 ; ---------------------------------
@@ -53,7 +53,7 @@ _DrawNumber2::
 	add	sp, #-17
 	ld	b, a
 	ld	c, e
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:14: unsigned char buffer[]="00000000";
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:14: unsigned char buffer[]="00000000";
 	ldhl	sp,	#0
 	ld	a,#0x30
 	ld	(hl+),a
@@ -68,7 +68,7 @@ _DrawNumber2::
 	ld	(hl+),a
 	ld	(hl+), a
 	ld	(hl), #0x00
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:17: uitoa(number, buffer, 10);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:17: uitoa(number, buffer, 10);
 	ldhl	sp,	#19
 	ld	a, (hl+)
 	ld	e, a
@@ -84,7 +84,7 @@ _DrawNumber2::
 	call	_uitoa
 	add	sp, #5
 	pop	bc
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:20: uint8_t len =strlen(buffer);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:20: uint8_t len =strlen(buffer);
 	ld	hl, #0
 	add	hl, sp
 	push	hl
@@ -92,7 +92,7 @@ _DrawNumber2::
 	pop	hl
 	ldhl	sp,	#9
 	ld	(hl), e
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:25: for(uint8_t i=0;i<digits-len;i++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:25: for(uint8_t i=0;i<digits-len;i++){
 	ldhl	sp,	#16
 	ld	(hl), b
 	ld	b, #0x00
@@ -155,7 +155,7 @@ _DrawNumber2::
 	scf
 00142$:
 	jr	NC, 00101$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:26: VBK_REG=1; set_bkg_tile_xy(x,y,0);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:26: VBK_REG=1;set_bkg_tile_xy(x,y,0);
 	ld	a, #0x01
 	ldh	(_VBK_REG + 0), a
 	xor	a, a
@@ -170,7 +170,7 @@ _DrawNumber2::
 	inc	sp
 	call	_set_bkg_tile_xy
 	add	sp, #3
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:27: VBK_REG=0;set_bkg_tile_xy(x++,y,USERINTERFACE_TILES_START+42);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:27: VBK_REG=0;set_bkg_tile_xy(x++,y,USERINTERFACE_TILES_START+42);
 	xor	a, a
 	ldh	(_VBK_REG + 0), a
 	ldhl	sp,	#16
@@ -190,11 +190,11 @@ _DrawNumber2::
 	inc	sp
 	call	_set_bkg_tile_xy
 	add	sp, #3
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:25: for(uint8_t i=0;i<digits-len;i++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:25: for(uint8_t i=0;i<digits-len;i++){
 	inc	b
 	jr	00104$
 00101$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:32: for(uint8_t i=0;i<len;i++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:32: for(uint8_t i=0;i<len;i++){
 	ldhl	sp,	#16
 	ld	b, (hl)
 	ld	e, #0x00
@@ -203,7 +203,7 @@ _DrawNumber2::
 	ldhl	sp,	#9
 	sub	a, (hl)
 	jr	NC, 00109$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:34: VBK_REG=1;set_bkg_tile_xy(x,y,0);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:34: VBK_REG=1;set_bkg_tile_xy(x,y,0);
 	ld	a, #0x01
 	ldh	(_VBK_REG + 0), a
 	push	de
@@ -218,7 +218,7 @@ _DrawNumber2::
 	call	_set_bkg_tile_xy
 	add	sp, #3
 	pop	de
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:35: VBK_REG=0;set_bkg_tile_xy(x++,y,(buffer[i]-'0')+USERINTERFACE_TILES_START+42);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:35: VBK_REG=0;set_bkg_tile_xy(x++,y,(buffer[i]-'0')+USERINTERFACE_TILES_START+42);
 	xor	a, a
 	ldh	(_VBK_REG + 0), a
 	push	de
@@ -242,43 +242,43 @@ _DrawNumber2::
 	call	_set_bkg_tile_xy
 	add	sp, #3
 	pop	de
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:32: for(uint8_t i=0;i<len;i++){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:32: for(uint8_t i=0;i<len;i++){
 	inc	e
 	jr	00107$
 00109$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:37: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:37: }
 	add	sp, #17
 	pop	hl
 	add	sp, #3
 	jp	(hl)
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:39: void ResetBall(){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:39: void ResetBall(){
 ;	---------------------------------
 ; Function ResetBall
 ; ---------------------------------
 _ResetBall::
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:41: ballX=BALLSTART_X;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:41: ballX=BALLSTART_X;
 	ld	hl, #_ballX
 	xor	a, a
 	ld	(hl+), a
 	ld	(hl), #0x04
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:42: ballY=BALLSTART_Y;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:42: ballY=BALLSTART_Y;
 	ld	hl, #_ballY
 	ld	a, #0x80
 	ld	(hl+), a
 	ld	(hl), #0x06
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:43: ballVelocityX=0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:43: ballVelocityX=0;
 	xor	a, a
 	ld	hl, #_ballVelocityX
 	ld	(hl+), a
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:44: ballVelocityY=0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:44: ballVelocityY=0;
 	xor	a, a
 	ld	hl, #_ballVelocityY
 	ld	(hl+), a
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:45: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:45: }
 	ret
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:47: uint8_t UpdateBall(uint8_t lastSprite){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:47: uint8_t UpdateBall(uint8_t lastSprite){
 ;	---------------------------------
 ; Function UpdateBall
 ; ---------------------------------
@@ -287,7 +287,7 @@ _UpdateBall::
 	dec	sp
 	ldhl	sp,	#1
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:50: ballX+=ballVelocityX>>4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:50: ballX+=ballVelocityX>>4;
 	ld	hl, #_ballVelocityX
 	ld	a, (hl+)
 	ld	c, a
@@ -307,7 +307,7 @@ _UpdateBall::
 	ld	a, (hl)
 	adc	a, b
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:51: ballY+=ballVelocityY>>4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:51: ballY+=ballVelocityY>>4;
 	ld	hl, #_ballVelocityY
 	ld	a, (hl+)
 	ld	c, a
@@ -326,7 +326,7 @@ _UpdateBall::
 	ld	(hl+), a
 	ld	a, (hl)
 	adc	a, b
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:55: if((ballY>>4)>144){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:55: if((ballY>>4)>144){
 	ld	(hl-), a
 	ld	a, (hl+)
 	ld	c, a
@@ -346,11 +346,11 @@ _UpdateBall::
 	ld	a, #0x00
 	sbc	a, d
 	jr	NC, 00102$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:58: return 0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:58: return 0;
 	xor	a, a
 	jr	00104$
 00102$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:61: lastSprite = move_metasprite(ball_metasprites[0],paddle_TILE_COUNT,lastSprite,(ballX>>4)+7,(ballY>>4)+15);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:61: lastSprite = move_metasprite(ball_metasprites[0],paddle_TILE_COUNT,lastSprite,(ballX>>4)+7,(ballY>>4)+15);
 	ld	a, c
 	add	a, #0x0f
 	ldhl	sp,	#0
@@ -398,10 +398,10 @@ _UpdateBall::
 	ld	e, a
 	ld	a, (hl)
 	call	___move_metasprite
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:63: return 1;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:63: return 1;
 	ld	a, #0x01
 00104$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\ball.c:64: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\ball.c:64: }
 	inc	sp
 	inc	sp
 	ret

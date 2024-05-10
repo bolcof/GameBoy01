@@ -45,7 +45,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\gen\graphics\Font.c:7: BANKREF(Font)
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\gen\graphics\Font.c:7: BANKREF(Font)
 ;	---------------------------------
 ; Function __func_Font
 ; ---------------------------------

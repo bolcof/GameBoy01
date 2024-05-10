@@ -86,7 +86,7 @@
                                      86 ; code
                                      87 ;--------------------------------------------------------
                                      88 	.area _CODE
-                                     89 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:27: uint8_t RandomNumber(uint8_t min, uint8_t max)
+                                     89 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\common.c:27: uint8_t RandomNumber(uint8_t min, uint8_t max)
                                      90 ;	---------------------------------
                                      91 ; Function RandomNumber
                                      92 ; ---------------------------------
@@ -95,7 +95,7 @@
                                      95 ;	spillPairReg hl
                                      96 ;	spillPairReg hl
       000001 7B               [ 4]   97 	ld	a, e
-                                     98 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:31: return min + (DIV_REG % (max - min)); 
+                                     98 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\common.c:31: return min + (DIV_REG % (max - min)); 
       000002 06 00            [ 8]   99 	ld	b, #0x00
       000004 5D               [ 4]  100 	ld	e, l
       000005 16 00            [ 8]  101 	ld	d, #0x00
@@ -112,7 +112,7 @@
       000015 E1               [12]  112 	pop	hl
       000016 79               [ 4]  113 	ld	a, c
       000017 85               [ 4]  114 	add	a, l
-                                    115 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\common.c:32: }
+                                    115 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\common.c:32: }
       000018 C9               [16]  116 	ret
       000019                        117 _BlackAndWhitePalette:
       000019 FF 7F                  118 	.dw #0x7fff

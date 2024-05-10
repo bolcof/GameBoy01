@@ -45,7 +45,7 @@
                                      45 ; code
                                      46 ;--------------------------------------------------------
                                      47 	.area _CODE
-                                     48 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\gen\graphics\paddle.c:7: BANKREF(paddle)
+                                     48 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\gen\graphics\paddle.c:7: BANKREF(paddle)
                                      49 ;	---------------------------------
                                      50 ; Function __func_paddle
                                      51 ; ---------------------------------

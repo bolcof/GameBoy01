@@ -45,7 +45,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\gen\graphics\Bricks.c:7: BANKREF(Bricks)
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\gen\graphics\Bricks.c:7: BANKREF(Bricks)
 ;	---------------------------------
 ; Function __func_Bricks
 ; ---------------------------------

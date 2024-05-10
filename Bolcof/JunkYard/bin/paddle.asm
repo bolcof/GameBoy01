@@ -41,56 +41,56 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:5: void ResetPaddle(){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:5: void ResetPaddle(){
 ;	---------------------------------
 ; Function ResetPaddle
 ; ---------------------------------
 _ResetPaddle::
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:8: paddleX=80<<4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:8: paddleX=80<<4;
 	ld	hl, #_paddleX
 	xor	a, a
 	ld	(hl+), a
 	ld	(hl), #0x05
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:9: paddleY=130<<4;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:9: paddleY=130<<4;
 	ld	hl, #_paddleY
 	ld	a, #0x20
 	ld	(hl+), a
 	ld	(hl), #0x08
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:10: paddleXSpeed=0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:10: paddleXSpeed=0;
 	xor	a, a
 	ld	hl, #_paddleXSpeed
 	ld	(hl+), a
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:12: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:12: }
 	ret
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:13: uint8_t UpdatePaddle(){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:13: uint8_t UpdatePaddle(){
 ;	---------------------------------
 ; Function UpdatePaddle
 ; ---------------------------------
 _UpdatePaddle::
 	add	sp, #-12
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:15: if(joypadCurrent & J_LEFT){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:15: if(joypadCurrent & J_LEFT){
 	ld	a, (#_joypadCurrent)
 	bit	1, a
 	jr	Z, 00111$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:16: paddleXSpeed=-500;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:16: paddleXSpeed=-500;
 	ld	hl, #_paddleXSpeed
 	ld	a, #0x0c
 	ld	(hl+), a
 	ld	(hl), #0xfe
 	jr	00112$
 00111$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:18: }else if(joypadCurrent & J_RIGHT){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:18: }else if(joypadCurrent & J_RIGHT){
 	rrca
 	jr	NC, 00108$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:19: paddleXSpeed=500;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:19: paddleXSpeed=500;
 	ld	hl, #_paddleXSpeed
 	ld	a, #0xf4
 	ld	(hl+), a
 	ld	(hl), #0x01
 	jr	00112$
 00108$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
 	ld	hl, #_paddleXSpeed
 	ld	a, (hl+)
 	ld	c, a
@@ -124,7 +124,7 @@ _UpdatePaddle::
 	ld	(hl), a
 	jr	00112$
 00105$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:25: else if(paddleXSpeed<-50)paddleXSpeed+=50;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:25: else if(paddleXSpeed<-50)paddleXSpeed+=50;
 	ld	hl, #_paddleXSpeed
 	ld	a, (hl+)
 	sub	a, #0xce
@@ -154,13 +154,13 @@ _UpdatePaddle::
 	ld	(hl), a
 	jr	00112$
 00102$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:26: else paddleXSpeed=0;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:26: else paddleXSpeed=0;
 	xor	a, a
 	ld	hl, #_paddleXSpeed
 	ld	(hl+), a
 	ld	(hl), a
 00112$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:29: paddleX=CLAMP(paddleX+(paddleXSpeed>>4),LEFT_PADDLE_LIMIT,RIGHT_PADDLE_LIMIT);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:29: paddleX=CLAMP(paddleX+(paddleXSpeed>>4),LEFT_PADDLE_LIMIT,RIGHT_PADDLE_LIMIT);
 	ld	hl, #_paddleXSpeed
 	ld	a, (hl+)
 	ld	c, a
@@ -216,7 +216,7 @@ _UpdatePaddle::
 	ld	hl, #_paddleX
 	ld	a, c
 	ld	(hl+), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
 	ld	a, b
 	ld	(hl-), a
 	ld	a, (hl)
@@ -225,14 +225,14 @@ _UpdatePaddle::
 	ld	a, (#_paddleX + 1)
 	ldhl	sp,	#11
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
 	ld	a, (#_paddleXSpeed)
 	ldhl	sp,	#0
 	ld	(hl), a
 	ld	a, (#_paddleXSpeed + 1)
 	ldhl	sp,	#1
 	ld	(hl), a
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
 	pop	de
 	push	de
 	ld	hl, #0x0003
@@ -279,19 +279,19 @@ _UpdatePaddle::
 	pop	hl
 	ld	a, h
 	ldhl	sp,	#9
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
 	ld	(hl+), a
 	ld	a, (hl+)
 	sub	a, #0x80
 	ld	a, (hl)
 	sbc	a, #0x06
 	jp	C, 00116$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:34: paddleX=RIGHT_PADDLE_LIMIT;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:34: paddleX=RIGHT_PADDLE_LIMIT;
 	ld	hl, #_paddleX
 	ld	a, #0x80
 	ld	(hl+), a
 	ld	(hl), #0x06
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
 	ldhl	sp,	#0
 	ld	a, (hl)
 	ldhl	sp,	#10
@@ -389,7 +389,7 @@ _UpdatePaddle::
 	ld	(hl), c
 	jr	00117$
 00116$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:38: else if(paddleX<=LEFT_PADDLE_LIMIT){
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:38: else if(paddleX<=LEFT_PADDLE_LIMIT){
 	ldhl	sp,	#10
 	ld	a, #0x80
 	sub	a, (hl)
@@ -397,12 +397,12 @@ _UpdatePaddle::
 	ld	a, #0x01
 	sbc	a, (hl)
 	jr	C, 00117$
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:39: paddleX=LEFT_PADDLE_LIMIT;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:39: paddleX=LEFT_PADDLE_LIMIT;
 	ld	hl, #_paddleX
 	ld	a, #0x80
 	ld	(hl+), a
 	ld	(hl), #0x01
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:40: paddleXSpeed=ABS((paddleXSpeed)/4)*2;
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:40: paddleXSpeed=ABS((paddleXSpeed)/4)*2;
 	pop	bc
 	push	bc
 	ldhl	sp,	#4
@@ -461,7 +461,7 @@ _UpdatePaddle::
 	ld	(hl+), a
 	ld	(hl), d
 00117$:
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
 	ld	hl, #_paddleY
 	ld	a, (hl+)
 	ld	c, a
@@ -518,8 +518,8 @@ _UpdatePaddle::
 	ld	e, a
 	xor	a, a
 	call	___move_metasprite
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:43: }
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:43: }
 	add	sp, #12
 	ret
 	.area _CODE

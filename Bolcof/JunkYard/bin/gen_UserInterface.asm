@@ -45,7 +45,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\gen\graphics\UserInterface.c:7: BANKREF(UserInterface)
+;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\gen\graphics\UserInterface.c:7: BANKREF(UserInterface)
 ;	---------------------------------
 ; Function __func_UserInterface
 ; ---------------------------------

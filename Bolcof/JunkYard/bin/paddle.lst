@@ -41,56 +41,56 @@
                                      41 ; code
                                      42 ;--------------------------------------------------------
                                      43 	.area _CODE
-                                     44 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:5: void ResetPaddle(){
+                                     44 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:5: void ResetPaddle(){
                                      45 ;	---------------------------------
                                      46 ; Function ResetPaddle
                                      47 ; ---------------------------------
       000000                         48 _ResetPaddle::
-                                     49 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:8: paddleX=80<<4;
+                                     49 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:8: paddleX=80<<4;
       000000 21r00r00         [12]   50 	ld	hl, #_paddleX
       000003 AF               [ 4]   51 	xor	a, a
       000004 22               [ 8]   52 	ld	(hl+), a
       000005 36 05            [12]   53 	ld	(hl), #0x05
-                                     54 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:9: paddleY=130<<4;
+                                     54 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:9: paddleY=130<<4;
       000007 21r00r00         [12]   55 	ld	hl, #_paddleY
       00000A 3E 20            [ 8]   56 	ld	a, #0x20
       00000C 22               [ 8]   57 	ld	(hl+), a
       00000D 36 08            [12]   58 	ld	(hl), #0x08
-                                     59 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:10: paddleXSpeed=0;
+                                     59 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:10: paddleXSpeed=0;
       00000F AF               [ 4]   60 	xor	a, a
       000010 21r00r00         [12]   61 	ld	hl, #_paddleXSpeed
       000013 22               [ 8]   62 	ld	(hl+), a
       000014 77               [ 8]   63 	ld	(hl), a
-                                     64 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:12: }
+                                     64 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:12: }
       000015 C9               [16]   65 	ret
-                                     66 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:13: uint8_t UpdatePaddle(){
+                                     66 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:13: uint8_t UpdatePaddle(){
                                      67 ;	---------------------------------
                                      68 ; Function UpdatePaddle
                                      69 ; ---------------------------------
       000016                         70 _UpdatePaddle::
       000016 E8 F4            [16]   71 	add	sp, #-12
-                                     72 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:15: if(joypadCurrent & J_LEFT){
+                                     72 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:15: if(joypadCurrent & J_LEFT){
       000018 FAr00r00         [16]   73 	ld	a, (#_joypadCurrent)
       00001B CB 4F            [ 8]   74 	bit	1, a
       00001D 28 0A            [12]   75 	jr	Z, 00111$
-                                     76 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:16: paddleXSpeed=-500;
+                                     76 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:16: paddleXSpeed=-500;
       00001F 21r00r00         [12]   77 	ld	hl, #_paddleXSpeed
       000022 3E 0C            [ 8]   78 	ld	a, #0x0c
       000024 22               [ 8]   79 	ld	(hl+), a
       000025 36 FE            [12]   80 	ld	(hl), #0xfe
       000027 18 6F            [12]   81 	jr	00112$
       000029                         82 00111$:
-                                     83 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:18: }else if(joypadCurrent & J_RIGHT){
+                                     83 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:18: }else if(joypadCurrent & J_RIGHT){
       000029 0F               [ 4]   84 	rrca
       00002A 30 0A            [12]   85 	jr	NC, 00108$
-                                     86 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:19: paddleXSpeed=500;
+                                     86 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:19: paddleXSpeed=500;
       00002C 21r00r00         [12]   87 	ld	hl, #_paddleXSpeed
       00002F 3E F4            [ 8]   88 	ld	a, #0xf4
       000031 22               [ 8]   89 	ld	(hl+), a
       000032 36 01            [12]   90 	ld	(hl), #0x01
       000034 18 62            [12]   91 	jr	00112$
       000036                         92 00108$:
-                                     93 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
+                                     93 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
       000036 21r00r00         [12]   94 	ld	hl, #_paddleXSpeed
       000039 2A               [ 8]   95 	ld	a, (hl+)
       00003A 4F               [ 4]   96 	ld	c, a
@@ -124,7 +124,7 @@
       000063 77               [ 8]  124 	ld	(hl), a
       000064 18 32            [12]  125 	jr	00112$
       000066                        126 00105$:
-                                    127 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:25: else if(paddleXSpeed<-50)paddleXSpeed+=50;
+                                    127 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:25: else if(paddleXSpeed<-50)paddleXSpeed+=50;
       000066 21r00r00         [12]  128 	ld	hl, #_paddleXSpeed
       000069 2A               [ 8]  129 	ld	a, (hl+)
       00006A D6 CE            [ 8]  130 	sub	a, #0xce
@@ -154,13 +154,13 @@
       00008F 77               [ 8]  154 	ld	(hl), a
       000090 18 06            [12]  155 	jr	00112$
       000092                        156 00102$:
-                                    157 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:26: else paddleXSpeed=0;
+                                    157 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:26: else paddleXSpeed=0;
       000092 AF               [ 4]  158 	xor	a, a
       000093 21r00r00         [12]  159 	ld	hl, #_paddleXSpeed
       000096 22               [ 8]  160 	ld	(hl+), a
       000097 77               [ 8]  161 	ld	(hl), a
       000098                        162 00112$:
-                                    163 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:29: paddleX=CLAMP(paddleX+(paddleXSpeed>>4),LEFT_PADDLE_LIMIT,RIGHT_PADDLE_LIMIT);
+                                    163 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:29: paddleX=CLAMP(paddleX+(paddleXSpeed>>4),LEFT_PADDLE_LIMIT,RIGHT_PADDLE_LIMIT);
       000098 21r00r00         [12]  164 	ld	hl, #_paddleXSpeed
       00009B 2A               [ 8]  165 	ld	a, (hl+)
       00009C 4F               [ 4]  166 	ld	c, a
@@ -216,7 +216,7 @@
       0000E0 21r00r00         [12]  216 	ld	hl, #_paddleX
       0000E3 79               [ 4]  217 	ld	a, c
       0000E4 22               [ 8]  218 	ld	(hl+), a
-                                    219 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
+                                    219 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
       0000E5 78               [ 4]  220 	ld	a, b
       0000E6 32               [ 8]  221 	ld	(hl-), a
       0000E7 7E               [ 8]  222 	ld	a, (hl)
@@ -225,14 +225,14 @@
       0000EB FAr01r00         [16]  225 	ld	a, (#_paddleX + 1)
       0000EE F8 0B            [12]  226 	ldhl	sp,	#11
       0000F0 77               [ 8]  227 	ld	(hl), a
-                                    228 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
+                                    228 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:24: if(paddleXSpeed>50)paddleXSpeed-=50;
       0000F1 FAr00r00         [16]  229 	ld	a, (#_paddleXSpeed)
       0000F4 F8 00            [12]  230 	ldhl	sp,	#0
       0000F6 77               [ 8]  231 	ld	(hl), a
       0000F7 FAr01r00         [16]  232 	ld	a, (#_paddleXSpeed + 1)
       0000FA F8 01            [12]  233 	ldhl	sp,	#1
       0000FC 77               [ 8]  234 	ld	(hl), a
-                                    235 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
+                                    235 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
       0000FD D1               [12]  236 	pop	de
       0000FE D5               [16]  237 	push	de
       0000FF 21 03 00         [12]  238 	ld	hl, #0x0003
@@ -279,19 +279,19 @@
       000135 E1               [12]  279 	pop	hl
       000136 7C               [ 4]  280 	ld	a, h
       000137 F8 09            [12]  281 	ldhl	sp,	#9
-                                    282 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
+                                    282 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:33: if(paddleX>=RIGHT_PADDLE_LIMIT){
       000139 22               [ 8]  283 	ld	(hl+), a
       00013A 2A               [ 8]  284 	ld	a, (hl+)
       00013B D6 80            [ 8]  285 	sub	a, #0x80
       00013D 7E               [ 8]  286 	ld	a, (hl)
       00013E DE 06            [ 8]  287 	sbc	a, #0x06
       000140 DArC8r01         [16]  288 	jp	C, 00116$
-                                    289 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:34: paddleX=RIGHT_PADDLE_LIMIT;
+                                    289 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:34: paddleX=RIGHT_PADDLE_LIMIT;
       000143 21r00r00         [12]  290 	ld	hl, #_paddleX
       000146 3E 80            [ 8]  291 	ld	a, #0x80
       000148 22               [ 8]  292 	ld	(hl+), a
       000149 36 06            [12]  293 	ld	(hl), #0x06
-                                    294 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
+                                    294 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:35: paddleXSpeed=-ABS((paddleXSpeed)/4)*2;
       00014B F8 00            [12]  295 	ldhl	sp,	#0
       00014D 7E               [ 8]  296 	ld	a, (hl)
       00014E F8 0A            [12]  297 	ldhl	sp,	#10
@@ -389,7 +389,7 @@
       0001C5 71               [ 8]  389 	ld	(hl), c
       0001C6 18 5D            [12]  390 	jr	00117$
       0001C8                        391 00116$:
-                                    392 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:38: else if(paddleX<=LEFT_PADDLE_LIMIT){
+                                    392 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:38: else if(paddleX<=LEFT_PADDLE_LIMIT){
       0001C8 F8 0A            [12]  393 	ldhl	sp,	#10
       0001CA 3E 80            [ 8]  394 	ld	a, #0x80
       0001CC 96               [ 8]  395 	sub	a, (hl)
@@ -397,12 +397,12 @@
       0001CE 3E 01            [ 8]  397 	ld	a, #0x01
       0001D0 9E               [ 8]  398 	sbc	a, (hl)
       0001D1 38 52            [12]  399 	jr	C, 00117$
-                                    400 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:39: paddleX=LEFT_PADDLE_LIMIT;
+                                    400 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:39: paddleX=LEFT_PADDLE_LIMIT;
       0001D3 21r00r00         [12]  401 	ld	hl, #_paddleX
       0001D6 3E 80            [ 8]  402 	ld	a, #0x80
       0001D8 22               [ 8]  403 	ld	(hl+), a
       0001D9 36 01            [12]  404 	ld	(hl), #0x01
-                                    405 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:40: paddleXSpeed=ABS((paddleXSpeed)/4)*2;
+                                    405 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:40: paddleXSpeed=ABS((paddleXSpeed)/4)*2;
       0001DB C1               [12]  406 	pop	bc
       0001DC C5               [16]  407 	push	bc
       0001DD F8 04            [12]  408 	ldhl	sp,	#4
@@ -461,7 +461,7 @@
       000223 22               [ 8]  461 	ld	(hl+), a
       000224 72               [ 8]  462 	ld	(hl), d
       000225                        463 00117$:
-                                    464 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
+                                    464 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
       000225 21r00r00         [12]  465 	ld	hl, #_paddleY
       000228 2A               [ 8]  466 	ld	a, (hl+)
       000229 4F               [ 4]  467 	ld	c, a
@@ -518,8 +518,8 @@
       000273 5F               [ 4]  518 	ld	e, a
       000274 AF               [ 4]  519 	xor	a, a
       000275 CDr00r00         [24]  520 	call	___move_metasprite
-                                    521 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
-                                    522 ;E:\make_202008\GameBoy\GameBoy01\JunkYard\source\default\paddle.c:43: }
+                                    521 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:42: return move_metasprite(paddle_metasprites[0],0,0,(paddleX>>4)+8,(paddleY>>4)+16);
+                                    522 ;E:\make_202008\GameBoy\WifiGameBoy\Bolcof\JunkYard\source\default\paddle.c:43: }
       000278 E8 0C            [16]  523 	add	sp, #12
       00027A C9               [16]  524 	ret
                                     525 	.area _CODE
