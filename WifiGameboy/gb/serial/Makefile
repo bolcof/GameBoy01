@@ -1,17 +1,29 @@
-CC	= ../../gbdk/bin/lcc -Wa-l -Wl-m -Wl-j
+CC = ../../gbdk/bin/lcc
+CFLAGS = -Wa-l -Wl-m -Wl-j -Iinclude
+BUILD_DIR = build
 
-BINS	= serial.gb
+# ソースファイルとヘッダファイルのパス
+SRC = src
+INC = include
 
-all:	$(BINS)
+# ソースファイル
+SRCS = $(SRC)/main.c $(SRC)/screen.c $(SRC)/input.c $(SRC)/sprite.c 
 
-compile.bat: Makefile
-	@echo "REM Automatically generated from Makefile" > compile.bat
-	@make -sn | sed y/\\//\\\\/ | grep -v make >> compile.bat
+# オブジェクトファイル
+OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/screen.o $(BUILD_DIR)/input.o $(BUILD_DIR)/sprite.o 
 
-# Compile and link single file in one pass
-%.gb:	%.c
-	$(CC) -o $@ $<
+# 出力ファイル
+OUTPUT = $(BUILD_DIR)/serial.gb
+
+# ターゲットの依存関係とルール
+all: $(OUTPUT)
+
+$(OUTPUT): $(OBJS)
+	$(CC) $(CFLAGS) -o $(OUTPUT) $(OBJS)
+
+# オブジェクトファイルのルール
+$(BUILD_DIR)/%.o: $(SRC)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm *.noi
-
+	rm -f $(OUTPUT) $(OBJS)
