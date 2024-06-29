@@ -1,0 +1,5 @@
+
+C:\Users\Owner\Documents\WifiGameBoy\Bolcof\SerialTest>REM Automatically generated from Makefile 
+
+C:\Users\Owner\Documents\WifiGameBoy\Bolcof\SerialTest>/Users/Owner/Documents/WifiGameBoy/gbdk/bin/lcc -Wa-l -Wl-m -Wl-j -o SerialTest.gb SerialTest.c 
+SerialTest.c:31: warning 283: function declarator with no prototype
